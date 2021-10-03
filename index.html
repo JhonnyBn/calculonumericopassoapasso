@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<title>Cálculo Numérico Passo a Passo</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Ícone da página e de favorito -->
+	<!-- link rel="icon" href="img/logo.ico" sizes="any" type="image/ico"-->
+	<!-- link rel="shortcut icon" href="img/logo.ico" sizes="any" type="image/ico"-->
+
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+	<!-- FontAwesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+	
+	<!-- Loading Bar CSS -->
+	<link rel="stylesheet type="text/css" href="css/loading.min.css">
+	<link rel="stylesheet type="text/css" href="css/ldbtn.min.css">
+
+	<!-- Scrollbar CSS -->
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+
+	<!-- Estilo da Pagina -->
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+
+	<!-- JQuery, Popper e Bootstrap JS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+	
+	<!-- Plotly, Math e MathJax JS -->
+	<script src="https://cdn.plot.ly/plotly-latest.min.js" charset="utf-8"></script>
+	<script src="https://cdn.plot.ly/plotly-locale-pt-br-latest.js"></script>
+	<script>Plotly.setPlotConfig({locale: 'pt-BR'})</script>
+	<script src="https://unpkg.com/mathjs@7.3.0/dist/math.min.js"></script>
+	<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+	<div class="wrapper">
+		<!-- Sidebar -->
+		<nav id="sidebar">
+			<!-- Sidebar Header -->
+			<div class="sidebar-header">
+				<!-- Commented Logo -><div class="logo-container"><img src="img/logo.png" alt="Logo" class="logo"></div> -->
+				Cálculo Numérico<br>
+				Passo a Passo
+			</div>
+			<!-- Sidebar Components -->
+			<ul class="sidebar-components list-unstyled">
+				<li id="navPrincipal">
+					<a href="#" onclick="abrirPagina('Principal')">Análise do Gráfico</a>
+				</li>
+				<li id="navBisseccao">
+					<a href="#" onclick="abrirPagina('Bisseccao')">Método da Bissecção</a>
+				</li>
+				<li id="navNewton">
+					<a href="#" onclick="abrirPagina('Newton')">Método de Newton</a>
+				</li>
+				<li id="navComparar">
+					<a href="#" onclick="abrirPagina('Comparar')">Comparar Métodos</a>
+				</li>
+			</ul>
+			<!-- Commented Sidebar Buttons -><ul class="CTAs list-unstyled"><li><a href="#" class="logout"><span class="fas fa-sign-out-alt"></span> Sair</a></li></ul> -->
+		</nav>
+	
+		<!-- Page  -->
+		<div id="page">
+			<!-- Navbar -->
+			<div id="navbar" class="row mx-0 align-items-center bg-primary-normal py-2">
+				<button id="sidebarCollapse" type="button" class="col-3 btn btn-icon">
+					<i class="fas fa-align-left"></i>
+				</button>
+				<h5 id="title" class="col title">Página Principal</h2>
+				<div class="col-3 invisible"></div>
+			</div>
+			<!-- content wrapper -->
+			<div id="outercontent">
+				<div class="d-block" style="max-height: 100%; width: 80%;">
+					<div>
+						<div class="row mb-3">
+							<p class="pp col-2">f(x)=</p>
+							<input id="expr" type="text" class="col" onchange="atualizarFuncao()"/>
+							<span class="col-2"></span>
+						</div>
+						<div class="row">
+							<p class="pp col-2">Intervalo</p>
+							<div class="col">
+								<span>[</span>
+								<input id="inicio" type="number" placeholder="0" value="0" style="width: 40%" onchange="atualizarGrafico()"/>
+								<span>,</span>
+								<input id="fim" type="number" placeholder="10" value="10" style="width: 40%" onchange="atualizarGrafico()"/>
+								<span>]</span>
+							</div>
+						</div>
+						<div class="row">
+							<p class="pp col-2">Função</p>
+							<div id="funcao" class="col">$$$$</div>
+							<span class="col-2"></span>
+						</div>
+					</div>
+					<div id="tabs">
+						<div id="tabPrincipal" class="tab">
+							<div id="plotPrincipal"></div>
+						</div>
+						<div id="tabBisseccao" class="tab">
+							<div class="row mb-3">
+								<p class="pp col-4">Intervalo Inicial</p>
+								<div class="col">
+									<span>[</span>
+									<input id="inicioBisseccao" type="number" placeholder="2,345" value="2.345" style="width: 40%"/>
+									<span>,</span>
+									<input id="fimBisseccao" type="number" placeholder="2,361" value="2.361" style="width: 40%"/>
+									<span>]</span>
+								</div>
+							</div>
+							<div class="row mb-3">
+								<p class="pp col-2">Precisão</p>
+								<div class="col" style="align-self: center">
+									<input id="precisaoBisseccao" type="number" placeholder="6" value="6"/>
+									<span> casas decimais</span>
+								</div>
+								<div class="col-3">
+									<button class="btn btn-text" onclick="bisseccao()">Calcular</button>
+								</div>
+							</div>
+							<div id="divIteracaoBisseccao" class="tab row mb-3">
+								<p class="pp col-4">Iteração</p>
+								<div class="col">
+									<button class="btn p-0" onclick="atualizarIteracao(-1)"><i class="fas fa-arrow-left"></i></button>
+									<input id="iteracaoBisseccao" type="number" value="1" min="1" style="width: 60px; text-align: center" onchange="graficoBisseccaoDaIteracao()"/>
+									<button class="btn p-0" onclick="atualizarIteracao(1)"><i class="fas fa-arrow-right"></i></button>
+								</div>
+							</div>
+							<div id="plotBisseccao"></div>
+							<div id="tabelaBisseccao" class="tab"></div>
+						</div>
+						<div id="tabNewton" class="tab">
+							<div class="row mb-3">
+								<p class="pp col-4">Aproximação Inicial</p>
+								<input id="aprox" type="number" placeholder="2,3" value="2.3" class="col"/>
+							</div>
+							<div class="row mb-3">
+								<p class="pp col-2">Precisão</p>
+								<div class="col" style="align-self: center">
+									<input id="precisaoNewton" type="number" placeholder="6" value="6"/>
+									<span> casas decimais</span>
+								</div>
+								<div class="col-3">
+									<button id="calcular" class="btn btn-text" onclick="newton()">Calcular</button>
+								</div>
+							</div>
+							<div id="plotNewton"></div>
+							<div id="tabelaNewton" class="tab"></div>
+						</div>
+						<div id="tabComparar" class="tab">
+							Lorem Ipsum
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- jQuery Scroller CDN -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+
+	<!-- JS da Pagina -->
+	<script src="js/index.js"></script>
+	<script src="js/bisseccao.js"></script>
+	<script src="js/newton.js"></script>
+</body>
+</html>

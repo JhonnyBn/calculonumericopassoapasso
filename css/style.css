@@ -1,0 +1,273 @@
+/*
+    ROOT STYLE
+*/
+
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #fafafa;
+}
+
+p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1em;
+    font-weight: 300;
+    line-height: 1.7em;
+}
+
+:root {
+	--primary-light: #646772/*#fce958*/;
+	--primary-normal: #383b44;
+	--primary-dark: #353841/*#dec300*/;
+	--primary-darker: #2b2c30/*#968400*/;
+	--secondary-light: #51545e/*#ffd154*/;
+	--secondary-normal: #2a2d35/*#ffc72f*/;
+	--secondary-dark: #282a30/*#ffc107*/;
+}
+
+.bg-primary-normal {
+	background-color: var(--primary-normal);
+}
+
+.btn-text {
+	color: #fff;
+	font-weight: 500;
+	text-shadow: 0 0 5px #000;
+	background-color: var(--primary-normal);
+	border-color: var(--primary-normal);
+}
+
+.btn-text:hover {
+	color: #fff;
+	font-weight: 500;
+	text-shadow: 0 0 5px #000;
+	background-color: var(--primary-light); /* #546167 */
+	border-color: var(--primary-normal); /* #37474f */
+	transition: all 0.3s;
+}
+
+.btn-text.ld-over-inverse:before {
+	background: var(--primary-normal)
+}
+
+.btn-icon {
+	color: #fff;
+	text-shadow: 0 0 3px #000;
+	background-color: var(--primary-normal);
+	border-color: var(--primary-normal);
+}
+
+.btn-icon:hover {
+	color: #fff;
+	text-shadow: 0 0 3px #000;
+	background-color: var(--primary-light);
+	border-color: var(--primary-normal);
+	transition: all 0.3s;
+}
+
+.title {
+	color: #fff;
+	text-shadow: 0 0 5px #000;
+	text-align: center;
+	margin-bottom: 0;
+}
+
+input {
+    border: none;
+}
+
+/* ---------------------------------------------------
+    UTILS STYLE
+----------------------------------------------------- */
+
+.line {
+    width: 100%;
+    height: 1px;
+    border-bottom: 1px solid #ddd;
+    margin: 40px 0;
+}
+
+p.pp {
+    font-weight: bold;
+    margin-bottom: 0;
+    align-self: center;
+}
+
+/* ---------------------------------------------------
+    SIDEBAR STYLE
+----------------------------------------------------- */
+
+.wrapper {
+    display: flex;
+    width: 100%;
+}
+
+#sidebar {
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 999;
+    background: var(--secondary-normal);
+    color: #fff;
+    transition: all 0.3s;
+	overflow-y: auto;
+}
+
+#sidebar.active {
+    margin-left: -250px;
+}
+
+#sidebar .sidebar-header {
+    padding: 40px 20px;
+    font-weight: 700;
+    font-size: large;
+}
+
+#sidebar .sidebar-components {
+    padding: 20px 0;
+}
+
+#sidebar a,
+#sidebar a:hover,
+#sidebar a:focus {
+    color: inherit;
+    text-decoration: none;
+	text-shadow: 0 0 5px #000;
+    transition: all 0.3s;
+}
+
+#sidebar ul li a {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+}
+
+#sidebar ul li a:hover {
+    color: #fff;
+    background: var(--secondary-light);
+}
+
+#sidebar ul li.active > a,
+a[aria-expanded="true"] {
+    color: #fff;
+    background: var(--primary-normal);
+}
+
+a[data-toggle="collapse"] {
+    position: relative;
+}
+
+.dropdown-toggle::after {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+
+#sidebar .sidebar-components ul a {
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+}
+
+#sidebar ul.CTAs {
+    padding: 20px;
+}
+
+#sidebar ul.CTAs a {
+    text-align: center;
+    font-size: 0.9em !important;
+    display: block;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+a.logout,
+a.logout:hover {
+    background: var(--primary-normal) !important;
+    color: #fff !important;
+}
+
+/* ---------------------------------------------------
+    LOGO STYLE
+----------------------------------------------------- */
+
+.logo-container {
+	display: flex;
+	flex-direction: column;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.logo {
+	align-self: center;
+	margin-bottom: 20px;
+	height: 100px;
+	width: 100px;
+}
+
+/* ---------------------------------------------------
+    PAGE STYLE
+----------------------------------------------------- */
+
+#page {
+    width: calc(100% - 250px);
+    min-height: 100vh;
+    transition: all 0.3s;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+#page.active {
+    width: 100%;
+}
+
+#outercontent {
+	height: calc(100vh - 70px);
+	display: flex;
+	align-items: baseline;
+	margin-top: 1rem;
+	justify-content: center;
+}
+
+/* ---------------------------------------------------
+    MEDIAQUERIES
+----------------------------------------------------- */
+
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -250px;
+    }
+    #sidebar.active {
+        margin-left: 0;
+    }
+    #page {
+        width: 100%;
+    }
+    #page.active {
+        width: calc(100% - 250px);
+    }
+    #sidebarCollapse span {
+        display: none;
+    }
+}
+
+/* ---------------------------------------------------
+    ALERTA STYLE
+----------------------------------------------------- */
+
+.alerta {
+	max-width: 50%;
+	display: none;
+	position: fixed;
+	bottom: 5%;
+	right: 5%;
+	z-index: 1052;
+}
+
+.alerta > .close {
+	font-size: 1.5rem;
+}
