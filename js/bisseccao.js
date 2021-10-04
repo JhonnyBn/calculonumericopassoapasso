@@ -25,7 +25,7 @@ function bisseccao() {
 				return
 			}
 			let x = math.round((a+b)*0.5, p)
-			elementos.push([iteracao, a, b, x, /*sinal(f(a)), sinal(f(x)), sinal(f(b)),*/ math.round(b-x, p), math.round(f(x), p)])
+			elementos.push([iteracao, a, b, x, sinal(f(a)), sinal(f(b)), sinal(f(x)), math.round(b-x, p), math.round(f(x), p)])
 			if ((b-x) < err)
 				break
 			f(a)*f(x) < 0 ? b = x : a = x
@@ -34,7 +34,7 @@ function bisseccao() {
 	} catch(e) {}
 	document.getElementById("iteracaoBisseccao").value = 1
 	document.getElementById("divIteracaoBisseccao").style.display = ''
-	let cabecalho = ["Iteração", "a", "b", "c", "b-c", "f(c)"]
+	let cabecalho = ["Iteração", "a", "b", "c", "f(a)", "f(b)", "f(c)", "b-c", "f(c)"]
 	let opcoes = [{ "name": "Mostrar Gráfico", "action": "graficoBisseccaoDaLinha(this)" }]
 	tabela('tabelaBisseccao', cabecalho, elementos, opcoes)
 	show("tabelaBisseccao")
