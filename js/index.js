@@ -6,9 +6,15 @@ function abrirPagina(pagina){
 	let nav = document.getElementById("nav" + pagina)
 	nav.classList.add('active')
 	document.getElementById("title").textContent = nav.textContent
-	document.getElementById("tab" + pagina).style.display = 'block'
-
+	let pag = document.getElementById("tab" + pagina)
+	pag.classList.remove("col-6")
+	pag.style.display = 'block'
+	
 	window.pagina = pagina
+	if (pagina === "Comparar") {
+		atualizarComparar()
+		return
+	}
 	atualizarGrafico()
 }
 
@@ -122,6 +128,57 @@ function atualizarGrafico() {
 	graficoFx('plot' + pagina, expressao, [inicio, fim])
 }
 
+function atualizarComparar() {
+	let expressao = document.getElementById('expr').value
+	let inicio = document.getElementById('inicio').value
+	let fim = document.getElementById('fim').value
+	graficoFx('plotComparar1', expressao, [inicio, fim])
+	graficoFx('plotComparar2', expressao, [inicio, fim])
+}
+
+function compararMetodos(metodo1, metodo2) {
+	document.querySelectorAll(".sidebar-components > li").forEach((nav)=>{nav.classList.remove('active')})
+	document.querySelectorAll(".tab").forEach((tab)=>{tab.style.display = 'none'})
+	
+	let nav = document.getElementById("nav" + metodo1)
+	nav.classList.add('active')
+	let pag1 = document.getElementById("tab" + metodo1)
+	pag1.classList.add("col-6")
+	pag1.style.display = 'block'
+
+	let nav2 = document.getElementById("nav" + metodo2)
+	nav2.classList.add('active')
+	document.getElementById("title").textContent = nav.textContent + " vs " + nav2.textContent
+	let pag2 = document.getElementById("tab" + metodo2)
+	pag2.classList.add("col-6")
+	pag2.style.display = 'block'
+
+	window.pagina = "Comparar"
+	window.metodo1 = metodo1
+	window.metodo2 = metodo2
+}
+
+function atualizarCompararMetodos(elem) {
+	let ordem = ["Bisseccao", "Newton"],
+	ordemElem = ordem.indexOf(elem.value),
+	om1 = ordem.indexOf(metodo1),
+	om2 = ordem.indexOf(metodo2)
+	
+	//if (ordemElem == om1 || ordemElem == om2)
+		//return
+	
+	if(ordemElem < om1)
+		window.metodo1 = elem.value
+	else if (ordemElem > om2)
+		window.metodo2 = elem.value
+	else
+		window.metodo1 = elem.value
+	
+	document.getElementById("compararMetodo1").value = metodo1
+	document.getElementById("compararMetodo2").value = metodo2
+	compararMetodos(metodo1,metodo2)
+}
+
 // Prepara o grafico inicial ao abrir a pagina
 function graficoInicial() {
 	let exprElem = document.getElementById('expr')
@@ -131,7 +188,7 @@ function graficoInicial() {
 
 function tabela(tableId, title, data, opcoes) {
 	let table = document.getElementById(tableId)
-	let html = "<table class='table table-striped table-bordered table-hover'>"
+	let html = "<table class='table table-striped table-bordered table-hover table-responsive'>"
 	if (title) {
 			html += "<thead class='thead-dark'><tr>"
 			for(d of title) {
@@ -167,7 +224,8 @@ var penultimoZoom, ultimoZoom;
 document.addEventListener('DOMContentLoaded', function() {
     window.pagina = "Principal"
 	graficoInicial()
-	abrirPagina("Principal")
+	//abrirPagina("Principal")
+	compararMetodos("Bisseccao", "Newton")
 
 	/*
 	let plot = document.getElementById("plot")

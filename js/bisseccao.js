@@ -4,8 +4,6 @@ function sinal(numero) {
 
 function bisseccao() {
 	const expressao = document.getElementById('expr').value
-	const inicio = document.getElementById('inicioBisseccao').value
-	const fim = document.getElementById('fimBisseccao').value
 	const funcao = math.parse(expressao)
 	const funcaoCompilada = funcao.compile()
 	let f = (x) => { return funcaoCompilada.evaluate({x: x}) }
