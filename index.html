@@ -100,11 +100,29 @@
 							<span class="col-2"></span>
 						</div>
 					</div>
-					<div id="tabs" class="row">
-						<div id="tabPrincipal" class="tab" style="display: none">
+					<div id="tabs">
+						<div id="tabPrincipal" class="tab">
 							<div id="plotPrincipal"></div>
 						</div>
-						<div id="tabBisseccao" class="tab col-6">
+						<div id="tabComparar" class="tab">
+							<div class="row">
+								<div class="col-6">
+									<select id="compararMetodo1" name="metodo1" class="custom-select" onchange="atualizarCompararMetodos(this)">
+										<option value="Bisseccao">Método da Bissecção</option>
+										<option value="Newton">Método da de Newton</option>
+									</select>
+									<!--div id="plotComparar1"></div-->
+								</div>
+								<div class="col-6">
+									<select id="compararMetodo2" name="metodo2" class="custom-select" onchange="atualizarCompararMetodos(this)">
+										<option value="Newton">Método da de Newton</option>
+										<option value="Bisseccao">Método da Bissecção</option>
+									</select>
+									<!--div id="plotComparar2"></div-->
+								</div>
+							</div>
+						</div>
+						<div id="tabBisseccao" class="tab">
 							<div class="row mb-3">
 								<p class="pp col-4">Intervalo Inicial</p>
 								<div class="col">
@@ -118,7 +136,7 @@
 							<div class="row mb-3">
 								<p class="pp col-2">Precisão</p>
 								<div class="col" style="align-self: center">
-									<input id="precisaoBisseccao" type="number" placeholder="6" value="6"/>
+									<input id="precisaoBisseccao" type="number" placeholder="6" value="6" min="0" max="16" style="width: 40px"/>
 									<span> casas decimais</span>
 								</div>
 								<div class="col-3">
@@ -136,7 +154,7 @@
 							<div id="plotBisseccao"></div>
 							<div id="tabelaBisseccao" class="tab"></div>
 						</div>
-						<div id="tabNewton" class="tab col-6">
+						<div id="tabNewton" class="tab">
 							<div class="row mb-3">
 								<p class="pp col-4">Aproximação Inicial</p>
 								<input id="aprox" type="number" placeholder="2,3" value="2.3" class="col"/>
@@ -144,7 +162,7 @@
 							<div class="row mb-3">
 								<p class="pp col-2">Precisão</p>
 								<div class="col" style="align-self: center">
-									<input id="precisaoNewton" type="number" placeholder="6" value="6"/>
+									<input id="precisaoNewton" type="number" placeholder="6" value="6" min="0" max="16" style="width: 40px"/>
 									<span> casas decimais</span>
 								</div>
 								<div class="col-3">
@@ -153,24 +171,6 @@
 							</div>
 							<div id="plotNewton"></div>
 							<div id="tabelaNewton" class="tab"></div>
-						</div>
-						<div id="tabComparar" class="tab" style="display: none">
-							<div class="row">
-								<div class="col-6">
-									<select id="compararMetodo1" name="metodo1" class="custom-select" onchange="atualizarCompararMetodos(this)">
-										<option value="Bisseccao">Método da Bissecção</option>
-										<option value="Newton">Método da de Newton</option>
-									</select>
-									<div id="plotComparar1"></div>
-								</div>
-								<div class="col-6">
-									<select id="compararMetodo2" name="metodo2" class="custom-select" onchange="atualizarCompararMetodos(this)">
-										<option value="Newton">Método da de Newton</option>
-										<option value="Bisseccao">Método da Bissecção</option>
-									</select>
-									<div id="plotComparar2"></div>
-								</div>
-							</div>
 						</div>
 					</div>
 				</div>

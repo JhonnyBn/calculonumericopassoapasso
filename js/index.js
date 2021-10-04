@@ -7,7 +7,7 @@ function abrirPagina(pagina){
 	nav.classList.add('active')
 	document.getElementById("title").textContent = nav.textContent
 	let pag = document.getElementById("tab" + pagina)
-	pag.classList.remove("col-6")
+	//pag.classList.remove("col-6")
 	pag.style.display = 'block'
 	
 	window.pagina = pagina
@@ -137,32 +137,21 @@ function atualizarComparar() {
 }
 
 function compararMetodos(metodo1, metodo2) {
-	document.querySelectorAll(".sidebar-components > li").forEach((nav)=>{nav.classList.remove('active')})
-	document.querySelectorAll(".tab").forEach((tab)=>{tab.style.display = 'none'})
-	
-	let nav = document.getElementById("nav" + metodo1)
-	nav.classList.add('active')
+	window.metodo1 = metodo1
+	window.metodo2 = metodo2
 	let pag1 = document.getElementById("tab" + metodo1)
 	pag1.classList.add("col-6")
 	pag1.style.display = 'block'
-
-	let nav2 = document.getElementById("nav" + metodo2)
-	nav2.classList.add('active')
-	document.getElementById("title").textContent = nav.textContent + " vs " + nav2.textContent
 	let pag2 = document.getElementById("tab" + metodo2)
 	pag2.classList.add("col-6")
 	pag2.style.display = 'block'
-
-	window.pagina = "Comparar"
-	window.metodo1 = metodo1
-	window.metodo2 = metodo2
 }
 
 function atualizarCompararMetodos(elem) {
 	let ordem = ["Bisseccao", "Newton"],
 	ordemElem = ordem.indexOf(elem.value),
-	om1 = ordem.indexOf(metodo1),
-	om2 = ordem.indexOf(metodo2)
+	om1 = ordem.indexOf(window.metodo1 || "Bisseccao"),
+	om2 = ordem.indexOf(window.metodo2 || "Newton")
 	
 	//if (ordemElem == om1 || ordemElem == om2)
 		//return
@@ -224,8 +213,8 @@ var penultimoZoom, ultimoZoom;
 document.addEventListener('DOMContentLoaded', function() {
     window.pagina = "Principal"
 	graficoInicial()
-	//abrirPagina("Principal")
-	compararMetodos("Bisseccao", "Newton")
+	abrirPagina("Principal")
+	//compararMetodos("Bisseccao", "Newton")
 
 	/*
 	let plot = document.getElementById("plot")
