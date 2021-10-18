@@ -44,6 +44,14 @@ function toggle(elemId) {
 		hide(elemId)
 }
 
+function clearZoom() {
+	penultimoZoom = ultimoZoom
+	ultimoZoom = {
+		"xaxis.autorange": true,
+		"yaxis.autorange": true
+	}
+}
+
 function graficoFx(elemId, expressao, limites, pontos, traces) {
 	let data = []
 	if(Array.isArray(expressao)) {
@@ -132,15 +140,26 @@ function graficoFx(elemId, expressao, limites, pontos, traces) {
 		displaylogo: false,
 		modeBarButtonsToRemove: ['select2d', 'lasso2d']
 	}
-	if(traces)
+	
+	if(traces) {
 		data.push(...traces)
+	}
+
 	plot = document.getElementById(elemId)
-	console.log(data)
-	if(plot.calcdata)
+	
+	if(plot.calcdata) {
 		Plotly.react(elemId, data, layout)
-	else
+		Plotly.relayout(plot, ultimoZoom)
+	}
+	else {
 		Plotly.newPlot(elemId, data, layout, config)
-		//Plotly.relayout(elemId, ultimoZoom)
+		plot.on("plotly_relayout", (e) => {
+			if(e != ultimoZoom) {
+				penultimoZoom = ultimoZoom
+				ultimoZoom = e
+			}
+		})
+	}
 }
 
 function graficoFxExprId(elemId, exprId, limites, pontos) {
@@ -166,6 +185,7 @@ function atualizarGrafico() {
 	let expressao = document.getElementById('expr').value
 	let inicio = document.getElementById('inicio').value
 	let fim = document.getElementById('fim').value
+	clearZoom()
 	graficoFx('plot' + pagina, expressao, [inicio, fim])
 }
 
@@ -257,15 +277,6 @@ document.addEventListener('DOMContentLoaded', function() {
 	abrirPagina("Principal")
 	//compararMetodos("Bisseccao", "Newton")
 
-	/*
-	let plot = document.getElementById("plot")
-	plot.on("plotly_relayout", (e) => {
-		penultimoZoom = ultimoZoom
-		ultimoZoom = e
-		console.log(e)
-		//Plotly.relayout(plot, update);
-	})
-	*/
 	// Configura a Scrollbar lateral
 	$("#sidebar").mCustomScrollbar({
 		theme: "minimal",

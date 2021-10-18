@@ -36,6 +36,7 @@ function bisseccao() {
 	let opcoes = [{ "name": "Mostrar Gráfico", "action": "graficoBisseccaoDaLinha(this)" }]
 	tabela('tabelaBisseccao', cabecalho, elementos, opcoes)
 	show("tabelaBisseccao")
+	clearZoom()
 	graficoBisseccaoDaIteracao()
 }
 
@@ -55,9 +56,9 @@ function graficoBisseccaoDaIteracao() {
 	const fim = document.getElementById('fimBisseccao').value
 	const iteracao = document.getElementById('iteracaoBisseccao').value
 	const resultado = document.querySelectorAll("#tabelaBisseccao > table > tbody > tr:nth-child(" + iteracao + ") > td")
-	const a = math.parse(resultado[1].textContent).value
-	const b = math.parse(resultado[2].textContent).value
-	const c = math.parse(resultado[3].textContent).value
+	const a = parseFloat(resultado[1].textContent)
+	const b = parseFloat(resultado[2].textContent)
+	const c = parseFloat(resultado[3].textContent)
 	const pontos = [
 		{nome: 'a', x: a},
 		{nome: 'b', x: b},

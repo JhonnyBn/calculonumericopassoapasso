@@ -23,7 +23,7 @@ function newton() {
 			}
             let y = f(x)
 			let x1 = math.round(x - y/derivada3(x), p)
-            let tan = "("+derivada3(x)+"*(x-"+x+")-"+y+")"
+            //let tan = "("+derivada3(x)+"*(x-"+x+")-"+y+")"
 			//let tan = x1 + "x + " + x1
 			elementos.push([
                 iteracao,
@@ -32,8 +32,7 @@ function newton() {
                 math.round(Math.abs(f(x1)), p),
                 math.round(Math.abs(x1-x), p),
                 math.round(f(x), p),
-                math.round(derivada3(x), p),
-                tan
+                math.round(derivada3(x), p)
             ])
 			if (Math.abs(f(x1)) < err || Math.abs(x1-x) < err)
 				break
@@ -41,9 +40,10 @@ function newton() {
 			iteracao += 1
 		}
 	} catch(e) { console.log(e) }
-    let cabecalho = ["Iteração", "x1", "x0", "|f(x1)|", "|x1-x0|", "f(x)", "f'(x)", "tan"]
+    let cabecalho = ["Iteração", "x1", "x0", "|f(x1)|", "|x1-x0|", "f(x)", "f'(x)"]
 	tabela('tabelaNewton', cabecalho, elementos)
     show("tabelaNewton")
+	clearZoom()
     graficoNewton(elementos)
 }
 
@@ -57,9 +57,7 @@ function graficoNewton(elementos) {
         {nome: 'x0', x: elementos[0][2]},
     ]
     let i = 1
-    let expressoes = [expressao]
     for (linha of elementos) {
-        expressoes.push(linha[7])
         pontos.push({nome: 'x' + i, x: linha[1]})
         i++
     }
@@ -74,6 +72,5 @@ function graficoNewton(elementos) {
 			type: 'lines'
 		})
 	}
-	console.log(traces)
 	graficoFx('plotNewton', expressao, [inicio, fim], pontos, traces)
 }
