@@ -24,6 +24,7 @@ function newton() {
             let y = f(x)
 			let x1 = math.round(x - y/derivada3(x), p)
             let tan = "("+derivada3(x)+"*(x-"+x+")-"+y+")"
+			//let tan = x1 + "x + " + x1
 			elementos.push([
                 iteracao,
                 x1,
@@ -62,5 +63,17 @@ function graficoNewton(elementos) {
         pontos.push({nome: 'x' + i, x: linha[1]})
         i++
     }
-	graficoFx('plotNewton', expressao, [inicio, fim], pontos)
+	traces = []
+	const funcao = math.parse(expressao)
+	const funcaoCompilada = funcao.compile()
+	let f = (x) => { return funcaoCompilada.evaluate({x: x}) }
+	for(i = 1; i < pontos.length; i++) {
+		traces.push({
+			x: [pontos[i-1].x, pontos[i].x],
+			y: [f(pontos[i-1].x), 0],
+			type: 'lines'
+		})
+	}
+	console.log(traces)
+	graficoFx('plotNewton', expressao, [inicio, fim], pontos, traces)
 }

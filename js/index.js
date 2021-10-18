@@ -12,7 +12,7 @@ function abrirPagina(pagina){
 	
 	window.pagina = pagina
 	if (pagina === "Comparar") {
-		atualizarComparar()
+		//atualizarComparar()
 		return
 	}
 	atualizarGrafico()
@@ -44,36 +44,75 @@ function toggle(elemId) {
 		hide(elemId)
 }
 
-function graficoFx(elemId, expressao, limites, pontos) {
-	const funcao = math.parse(expressao)
-	const f = funcao.compile()
-	
-	const xValues = math.range(limites[0], limites[1], (limites[1] - limites[0]) / 10000 ).toArray()
-	const yValuesFuncao = xValues.map(function (x) {
-		return f.evaluate({x: x})
-	})
+function graficoFx(elemId, expressao, limites, pontos, traces) {
+	let data = []
+	if(Array.isArray(expressao)) {
+		const xValues = math.range(limites[0], limites[1], (limites[1] - limites[0]) / 10000 ).toArray()
+		for (exp of expressao) {
+			const funcao = math.parse(exp)
+			const f = funcao.compile()
+			
+			const yValuesFuncao = xValues.map(function (x) {
+				return f.evaluate({x: x})
+			})
 
-	const trace1 = {
-		x: xValues,
-		y: yValuesFuncao,
-		type: 'scatter',
-		name: 'função'
+			const trace = {
+				x: xValues,
+				y: yValuesFuncao,
+				type: 'scatter',
+				name: 'função'
+			}
+			data.push(trace)
+		}
+		
+		if (pontos) {
+			const funcao = math.parse(expressao[0])
+			const f = funcao.compile()
+			data.push({
+				x: pontos.map((x) => { return x.x }),
+				y: pontos.map((x) => { return f.evaluate({x: x.x}) }),
+				type: 'scatter',
+				mode: 'markers+text',
+				marker: {
+					size: 10
+				},
+				text: pontos.map((x) => { return x.nome }),
+				textposition: 'top',
+				name: 'Pontos de Interesse'
+			})
+		}
 	}
-	let data = [trace1]		
-	
-	if (pontos) {
-		data.push({
-			x: pontos.map((x) => { return x.x }),
-			y: pontos.map((x) => { return f.evaluate({x: x.x}) }),
-			type: 'scatter',
-			mode: 'markers+text',
-			marker: {
-				size: 10
-			},
-			text: pontos.map((x) => { return x.nome }),
-			textposition: 'top',
-			name: 'Pontos de Interesse'
+	else {
+		const funcao = math.parse(expressao)
+		const f = funcao.compile()
+		
+		const xValues = math.range(limites[0], limites[1], (limites[1] - limites[0]) / 10000 ).toArray()
+		const yValuesFuncao = xValues.map(function (x) {
+			return f.evaluate({x: x})
 		})
+
+		const trace1 = {
+			x: xValues,
+			y: yValuesFuncao,
+			type: 'scatter',
+			name: 'função'
+		}
+		data = [trace1]
+
+		if (pontos) {
+			data.push({
+				x: pontos.map((x) => { return x.x }),
+				y: pontos.map((x) => { return f.evaluate({x: x.x}) }),
+				type: 'scatter',
+				mode: 'markers+text',
+				marker: {
+					size: 10
+				},
+				text: pontos.map((x) => { return x.nome }),
+				textposition: 'top',
+				name: 'Pontos de Interesse'
+			})
+		}
 	}
 	
 	layout = {
@@ -93,8 +132,10 @@ function graficoFx(elemId, expressao, limites, pontos) {
 		displaylogo: false,
 		modeBarButtonsToRemove: ['select2d', 'lasso2d']
 	}
-	
+	if(traces)
+		data.push(...traces)
 	plot = document.getElementById(elemId)
+	console.log(data)
 	if(plot.calcdata)
 		Plotly.react(elemId, data, layout)
 	else
