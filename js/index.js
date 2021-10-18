@@ -29,6 +29,13 @@ function botaoCarregando(button, isLoading) {
 	}
 }
 
+function checarPrecisao(input) {
+	if (input.value < 0)
+		input.value = 0
+	if (input.value > 15)
+		input.value = 15
+}
+
 function show(elemId) {
 	document.getElementById(elemId).style.display = ''
 }
