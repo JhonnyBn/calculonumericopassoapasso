@@ -31,7 +31,7 @@ function bisseccao() {
 			iteracao += 1
 		}
 	} catch(e) { console.log(e) }
-	document.getElementById("iteracaoBisseccao").value = 1
+	document.getElementById("iteracaoBisseccao").value = 0
 	document.getElementById("divIteracaoBisseccao").style.display = ''
 	let cabecalho = ["Iteração", "a", "c", "b", "f(a)", "f(c)", "f(b)", "b-c", "f(c)"]
 	let opcoes = [{ "name": "Mostrar Gráfico", "action": "graficoBisseccaoDaLinha(this)" }]
@@ -43,7 +43,7 @@ function bisseccao() {
 
 function atualizarIteracaoBisseccao(delta) {
 	const iteracao = document.getElementById('iteracaoBisseccao')
-	const max = document.querySelectorAll("#tabelaBisseccao > table > tbody > tr").length
+	const max = document.querySelectorAll("#tabelaBisseccao > table > tbody > tr").length - 1
 	let iteracaoN = parseInt(iteracao.value)
 	if( iteracaoN + delta >= 0 && iteracaoN + delta <= max )
 	{
@@ -54,7 +54,7 @@ function atualizarIteracaoBisseccao(delta) {
 
 function iteracaoChangeBisseccao() {
 	const iteracao = document.getElementById('iteracaoBisseccao').value
-	const max = document.querySelectorAll("#tabelaBisseccao > table > tbody > tr").length
+	const max = document.querySelectorAll("#tabelaBisseccao > table > tbody > tr").length - 1
 	if( iteracao < 0 )
 		document.getElementById('iteracaoBisseccao').value = 0
 	if ( iteracao > max )
@@ -66,8 +66,8 @@ function graficoBisseccaoDaIteracao() {
 	const expressao = document.getElementById('expr').value
 	const inicio = document.getElementById('inicioBisseccao').value
 	const fim = document.getElementById('fimBisseccao').value
-	const iteracao = document.getElementById('iteracaoBisseccao').value
-	const resultado = document.querySelectorAll("#tabelaBisseccao > table > tbody > tr:nth-child(" + iteracao + ") > td")
+	const iteracao = parseInt(document.getElementById('iteracaoBisseccao').value)
+	const resultado = document.querySelectorAll("#tabelaBisseccao > table > tbody > tr:nth-child(" + ( iteracao + 1 ) + ") > td")
 	const a = parseFloat(resultado[1].textContent)
 	const c = parseFloat(resultado[2].textContent)
 	const b = parseFloat(resultado[3].textContent)
