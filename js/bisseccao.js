@@ -8,7 +8,7 @@ function bisseccao() {
 	const funcaoCompilada = funcao.compile()
 	let f = (x) => { return funcaoCompilada.evaluate({x: x}) }
 	let elementos = []
-	let iteracao = 1
+	let iteracao = 0
 	let a = document.getElementById("inicioBisseccao").value
 	let b = document.getElementById("fimBisseccao").value
 	let p = document.getElementById("precisaoBisseccao").value
@@ -44,7 +44,7 @@ function atualizarIteracaoBisseccao(delta) {
 	const iteracao = document.getElementById('iteracaoBisseccao')
 	const max = document.querySelectorAll("#tabelaBisseccao > table > tbody > tr").length
 	let iteracaoN = parseInt(iteracao.value)
-	if( iteracaoN + delta > 0 && iteracaoN + delta <= max )
+	if( iteracaoN + delta >= 0 && iteracaoN + delta <= max )
 	{
 		iteracao.value = iteracaoN + delta
 		iteracao.onchange()
@@ -55,7 +55,7 @@ function iteracaoChangeBisseccao() {
 	const iteracao = document.getElementById('iteracaoBisseccao').value
 	const max = document.querySelectorAll("#tabelaBisseccao > table > tbody > tr").length
 	if( iteracao < 0 )
-		document.getElementById('iteracaoBisseccao').value = 1
+		document.getElementById('iteracaoBisseccao').value = 0
 	if ( iteracao > max )
 		document.getElementById('iteracaoBisseccao').value = max
 	graficoBisseccaoDaIteracao()

@@ -9,7 +9,7 @@ function newton() {
 	const derivadaCompilada = derivada.compile()
 	const derivada3 = (x) => { return derivadaCompilada.evaluate({x: x}) }
 	let elementos = []
-	let iteracao = 1
+	let iteracao = 0
 	let aprox = document.getElementById("aprox").value
 	let p = document.getElementById("precisaoNewton").value
 	try{
@@ -83,7 +83,7 @@ function atualizarIteracaoNewton(delta) {
 	const iteracao = document.getElementById('iteracaoNewton')
 	const max = document.querySelectorAll("#tabelaNewton > table > tbody > tr").length
 	let iteracaoN = parseInt(iteracao.value)
-	if( iteracaoN + delta > 0 && iteracaoN + delta <= max )
+	if( iteracaoN + delta >= 0 && iteracaoN + delta <= max )
 	{
 		iteracao.value = iteracaoN + delta
 		iteracao.onchange()
@@ -94,7 +94,7 @@ function iteracaoChangeNewton() {
 	const iteracao = document.getElementById('iteracaoNewton').value
 	const max = document.querySelectorAll("#tabelaNewton > table > tbody > tr").length
 	if( iteracao < 0 )
-		document.getElementById('iteracaoNewton').value = 1
+		document.getElementById('iteracaoNewton').value = 0
 	if ( iteracao > max )
 		document.getElementById('iteracaoNewton').value = max
 	graficoNewtonDaIteracao()
