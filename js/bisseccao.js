@@ -23,8 +23,8 @@ function bisseccao() {
 				return
 			}
 			let x = math.round((a+b)*0.5, p)
-			elementos.push([iteracao, a, x, b, sinal(f(a)), sinal(f(x)), sinal(f(b)), math.round(a-b, p), math.round(f(x), p)])
-			if ((a-b) < err)
+			elementos.push([iteracao, a, x, b, sinal(f(a)), sinal(f(x)), sinal(f(b)), math.round(b-a, p), math.round(f(x), p)])
+			if ((b-a) < err)
 				break
 			f(a)*f(x) < 0 ? b = x : a = x
 			iteracao += 1
@@ -32,7 +32,7 @@ function bisseccao() {
 	} catch(e) {}
 	document.getElementById("iteracaoBisseccao").value = 1
 	document.getElementById("divIteracaoBisseccao").style.display = ''
-	let cabecalho = ["Iteração", "a", "c", "b", "f(a)", "f(c)", "f(b)", "a-b", "f(c)"]
+	let cabecalho = ["Iteração", "a", "c", "b", "f(a)", "f(c)", "f(b)", "b-a", "f(c)"]
 	let opcoes = [{ "name": "Mostrar Gráfico", "action": "graficoBisseccaoDaLinha(this)" }]
 	tabela('tabelaBisseccao', cabecalho, elementos, opcoes)
 	show("tabelaBisseccao")
@@ -68,12 +68,12 @@ function graficoBisseccaoDaIteracao() {
 	const iteracao = document.getElementById('iteracaoBisseccao').value
 	const resultado = document.querySelectorAll("#tabelaBisseccao > table > tbody > tr:nth-child(" + iteracao + ") > td")
 	const a = parseFloat(resultado[1].textContent)
-	const b = parseFloat(resultado[2].textContent)
-	const c = parseFloat(resultado[3].textContent)
+	const c = parseFloat(resultado[2].textContent)
+	const b = parseFloat(resultado[3].textContent)
 	const pontos = [
 		{nome: 'a', x: a},
-		{nome: 'b', x: b},
-		{nome: 'c', x: c}
+		{nome: 'c', x: c},
+		{nome: 'b', x: b}
 	]
 	graficoFx('plotBisseccao', expressao, [inicio, fim], pontos)
 }
