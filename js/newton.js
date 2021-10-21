@@ -27,8 +27,8 @@ function newton() {
 			//let tan = x1 + "x + " + x1
 			elementos.push([
                 iteracao,
-                x1,
                 x,
+				x1,
                 math.round(Math.abs(f(x1)), p),
                 math.round(Math.abs(x1-x), p),
                 math.round(f(x), p),
@@ -40,11 +40,14 @@ function newton() {
 			iteracao += 1
 		}
 	} catch(e) { console.log(e) }
-    let cabecalho = ["Iteração", "x1", "x0", "|f(x1)|", "|x1-x0|", "f(x)", "f'(x)"]
+	document.getElementById("iteracaoNewton").value = 1
+	document.getElementById("divIteracaoNewton").style.display = ''
+    let cabecalho = ["Iteração", "x0", "x1", "|f(x1)|", "|x1-x0|", "f(x)", "f'(x)"]
 	tabela('tabelaNewton', cabecalho, elementos)
     show("tabelaNewton")
 	clearZoom()
-    graficoNewton(elementos)
+	graficoNewtonDaIteracao()
+    //graficoNewton(elementos)
 }
 
 function graficoNewton(elementos) {
@@ -73,4 +76,56 @@ function graficoNewton(elementos) {
 		})
 	}
 	graficoFx('plotNewton', expressao, [inicio, fim], pontos, traces)
+}
+
+function atualizarIteracaoNewton(delta) {
+	const iteracao = document.getElementById('iteracaoNewton')
+	const max = document.querySelectorAll("#tabelaNewton > table > tbody > tr").length
+	let iteracaoN = parseInt(iteracao.value)
+	if( iteracaoN + delta > 0 && iteracaoN + delta <= max )
+	{
+		iteracao.value = iteracaoN + delta
+		iteracao.onchange()
+	}
+}
+
+function iteracaoChangeNewton() {
+	const iteracao = document.getElementById('iteracaoNewton').value
+	const max = document.querySelectorAll("#tabelaNewton > table > tbody > tr").length
+	if( iteracao < 0 )
+		document.getElementById('iteracaoNewton').value = 1
+	if ( iteracao > max )
+		document.getElementById('iteracaoNewton').value = max
+	graficoNewtonDaIteracao()
+}
+
+function graficoNewtonDaIteracao() {
+	const expressao = document.getElementById('expr').value
+	const funcao = math.parse(expressao)
+	const funcaoCompilada = funcao.compile()
+	let f = (x) => { return funcaoCompilada.evaluate({x: x}) }
+	const inicio = document.getElementById('inicio').value
+	const fim = document.getElementById('fim').value
+	const iteracao = document.getElementById('iteracaoNewton').value
+	const resultado = document.querySelectorAll("#tabelaNewton > table > tbody > tr:nth-child(" + iteracao + ") > td")
+	const a = parseFloat(resultado[1].textContent)
+	const b = parseFloat(resultado[2].textContent)
+	const pontos = [
+		{nome: 'x0', x: a},
+		{nome: 'x1', x: b}
+	]
+	let traces = [{
+		x: [a, b],
+		y: [f(a), 0],
+		type: 'lines',
+		name: 'tangente'
+	}]
+	graficoFx('plotNewton', expressao, [inicio, fim], pontos, traces)
+}
+
+function graficoBisseccaoDaLinha(elem) {
+	const iteracao = parseInt(elem.parentElement.parentElement.children[0].innerText)
+	document.getElementById("iteracaoNewton").value = iteracao
+	graficoNewtonDaIteracao()
+	window.scrollTo(0, 200)
 }

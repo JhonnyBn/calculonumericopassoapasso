@@ -40,14 +40,25 @@ function bisseccao() {
 	graficoBisseccaoDaIteracao()
 }
 
-function atualizarIteracao(delta) {
+function atualizarIteracaoBisseccao(delta) {
 	const iteracao = document.getElementById('iteracaoBisseccao')
+	const max = document.querySelectorAll("#tabelaBisseccao > table > tbody > tr").length
 	let iteracaoN = parseInt(iteracao.value)
-	if( iteracaoN + delta > 0 )
+	if( iteracaoN + delta > 0 && iteracaoN + delta <= max )
 	{
 		iteracao.value = iteracaoN + delta
 		iteracao.onchange()
 	}
+}
+
+function iteracaoChangeBisseccao() {
+	const iteracao = document.getElementById('iteracaoBisseccao').value
+	const max = document.querySelectorAll("#tabelaBisseccao > table > tbody > tr").length
+	if( iteracao < 0 )
+		document.getElementById('iteracaoBisseccao').value = 1
+	if ( iteracao > max )
+		document.getElementById('iteracaoBisseccao').value = max
+	graficoBisseccaoDaIteracao()
 }
 
 function graficoBisseccaoDaIteracao() {

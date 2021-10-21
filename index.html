@@ -134,7 +134,23 @@
 							<div class="row mb-3">
 								<p class="pp col-2">Precisão</p>
 								<div class="col" style="align-self: center">
-									<input id="precisaoBisseccao" type="number" placeholder="6" value="6" min="0" max="15" style="width: 40px" onchange="checarPrecisao(this)"/>
+									<select id="precisaoBisseccao" class="form-select" style="width: 40px">
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6" selected>6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
+										<option value="9">9</option>
+										<option value="10">10</option>
+										<option value="11">11</option>
+										<option value="12">12</option>
+										<option value="13">13</option>
+										<option value="14">14</option>
+										<option value="15">15</option>
+									</select>
 									<span> casas decimais</span>
 								</div>
 								<div class="col-3">
@@ -144,9 +160,9 @@
 							<div id="divIteracaoBisseccao" class="tab row mb-3">
 								<p class="pp col-4">Iteração</p>
 								<div class="col">
-									<button class="btn p-0" onclick="atualizarIteracao(-1)"><i class="fas fa-arrow-left"></i></button>
-									<input id="iteracaoBisseccao" type="number" value="1" min="1" style="width: 60px; text-align: center" onchange="graficoBisseccaoDaIteracao()"/>
-									<button class="btn p-0" onclick="atualizarIteracao(1)"><i class="fas fa-arrow-right"></i></button>
+									<button class="btn p-0" onclick="atualizarIteracaoBisseccao(-1)"><i class="fas fa-arrow-left"></i></button>
+									<input id="iteracaoBisseccao" type="number" value="1" min="1" style="width: 60px; text-align: center" onchange="iteracaoChangeBisseccao()"/>
+									<button class="btn p-0" onclick="atualizarIteracaoBisseccao(1)"><i class="fas fa-arrow-right"></i></button>
 								</div>
 							</div>
 							<div id="plotBisseccao"></div>
@@ -160,11 +176,35 @@
 							<div class="row mb-3">
 								<p class="pp col-2">Precisão</p>
 								<div class="col" style="align-self: center">
-									<input id="precisaoNewton" type="number" placeholder="6" value="6" min="0" max="15" style="width: 40px" onchange="checarPrecisao(this)"/>
+									<select id="precisaoNewton" class="form-select" style="width: 40px">
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6" selected>6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
+										<option value="9">9</option>
+										<option value="10">10</option>
+										<option value="11">11</option>
+										<option value="12">12</option>
+										<option value="13">13</option>
+										<option value="14">14</option>
+										<option value="15">15</option>
+									</select>
 									<span> casas decimais</span>
 								</div>
 								<div class="col-3">
 									<button id="calcular" class="btn btn-text" onclick="newton()">Calcular</button>
+								</div>
+							</div>
+							<div id="divIteracaoNewton" class="tab row mb-3">
+								<p class="pp col-4">Iteração</p>
+								<div class="col">
+									<button class="btn p-0" onclick="atualizarIteracaoNewton(-1)"><i class="fas fa-arrow-left"></i></button>
+									<input id="iteracaoNewton" type="number" value="1" min="1" style="width: 60px; text-align: center" onchange="iteracaoChangeNewton()"/>
+									<button class="btn p-0" onclick="atualizarIteracaoNewton(1)"><i class="fas fa-arrow-right"></i></button>
 								</div>
 							</div>
 							<div id="plotNewton"></div>
