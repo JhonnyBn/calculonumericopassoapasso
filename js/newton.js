@@ -43,7 +43,8 @@ function newton() {
 	document.getElementById("iteracaoNewton").value = 1
 	document.getElementById("divIteracaoNewton").style.display = ''
     let cabecalho = ["Iteração", "x0", "x1", "|f(x1)|", "|x1-x0|", "f(x)", "f'(x)"]
-	tabela('tabelaNewton', cabecalho, elementos)
+	let opcoes = [{ "name": "Mostrar Gráfico", "action": "graficoNewtonDaLinha(this)" }]
+	tabela('tabelaNewton', cabecalho, elementos, opcoes)
     show("tabelaNewton")
 	clearZoom()
 	graficoNewtonDaIteracao()
@@ -123,7 +124,7 @@ function graficoNewtonDaIteracao() {
 	graficoFx('plotNewton', expressao, [inicio, fim], pontos, traces)
 }
 
-function graficoBisseccaoDaLinha(elem) {
+function graficoNewtonDaLinha(elem) {
 	const iteracao = parseInt(elem.parentElement.parentElement.children[0].innerText)
 	document.getElementById("iteracaoNewton").value = iteracao
 	graficoNewtonDaIteracao()
