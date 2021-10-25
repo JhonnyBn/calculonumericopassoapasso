@@ -54,6 +54,7 @@ function clearZoom() {
 
 function graficoFx(elemId, expressao, limites, pontos, traces) {
 	let data = []
+	let pontosTrace = []
 	if(Array.isArray(expressao)) {
 		const xValues = math.range(limites[0], limites[1], (limites[1] - limites[0]) / 10000 ).toArray()
 		for (exp of expressao) {
@@ -76,7 +77,7 @@ function graficoFx(elemId, expressao, limites, pontos, traces) {
 		if (pontos) {
 			const funcao = math.parse(expressao[0])
 			const f = funcao.compile()
-			data.push({
+			pontosTrace.push({
 				x: pontos.map((x) => { return x.x }),
 				y: pontos.map((x) => { return f.evaluate({x: x.x}) }),
 				type: 'scatter',
@@ -108,7 +109,7 @@ function graficoFx(elemId, expressao, limites, pontos, traces) {
 		data = [trace1]
 
 		if (pontos) {
-			data.push({
+			pontosTrace.push({
 				x: pontos.map((x) => { return x.x }),
 				y: pontos.map((x) => { return f.evaluate({x: x.x}) }),
 				type: 'scatter',
@@ -143,6 +144,9 @@ function graficoFx(elemId, expressao, limites, pontos, traces) {
 	
 	if(traces) {
 		data.push(...traces)
+	}
+	if(pontos) {
+		data.push(...pontosTrace)
 	}
 
 	plot = document.getElementById(elemId)

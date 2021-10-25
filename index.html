@@ -55,8 +55,14 @@
 				<li id="navBisseccao">
 					<a href="#" onclick="abrirPagina('Bisseccao')">Método da Bissecção</a>
 				</li>
+				<li id="navFalsaPosicao">
+					<a href="#" onclick="abrirPagina('FalsaPosicao')">Método da Falsa Posição</a>
+				</li>
 				<li id="navNewton">
 					<a href="#" onclick="abrirPagina('Newton')">Método de Newton</a>
+				</li>
+				<li id="navSecante">
+					<a href="#" onclick="abrirPagina('Secante')">Método da Secante</a>
 				</li>
 				<!-- li id="navComparar"><a href="#" onclick="abrirPagina('Comparar')">Comparar Métodos</a></li -->
 			</ul>
@@ -210,6 +216,102 @@
 							<div id="plotNewton"></div>
 							<div id="tabelaNewton" class="tab"></div>
 						</div>
+						<div id="tabFalsaPosicao" class="tab">
+							<div class="row mb-3">
+								<p class="pp col-4">Intervalo Inicial</p>
+								<div class="col">
+									<span>[</span>
+									<input id="inicioFalsaPosicao" type="number" placeholder="2,345" value="2.345" style="width: 40%"/>
+									<span>,</span>
+									<input id="fimFalsaPosicao" type="number" placeholder="2,361" value="2.361" style="width: 40%"/>
+									<span>]</span>
+								</div>
+							</div>
+							<div class="row mb-3">
+								<p class="pp col-2">Precisão</p>
+								<div class="col" style="align-self: center">
+									<select id="precisaoFalsaPosicao" class="form-select" style="width: 40px">
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6" selected>6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
+										<option value="9">9</option>
+										<option value="10">10</option>
+										<option value="11">11</option>
+										<option value="12">12</option>
+										<option value="13">13</option>
+										<option value="14">14</option>
+										<option value="15">15</option>
+									</select>
+									<span> casas decimais</span>
+								</div>
+								<div class="col-3">
+									<button id="calcular" class="btn btn-text" onclick="falsaPosicao()">Calcular</button>
+								</div>
+							</div>
+							<div id="divIteracaoFalsaPosicao" class="tab row mb-3">
+								<p class="pp col-4">Iteração</p>
+								<div class="col">
+									<button class="btn p-0" onclick="atualizarIteracaoFalsaPosicao(-1)"><i class="fas fa-arrow-left"></i></button>
+									<input id="iteracaoFalsaPosicao" type="number" value="1" min="1" style="width: 60px; text-align: center" onchange="iteracaoChangeFalsaPosicao()"/>
+									<button class="btn p-0" onclick="atualizarIteracaoFalsaPosicao(1)"><i class="fas fa-arrow-right"></i></button>
+								</div>
+							</div>
+							<div id="plotFalsaPosicao"></div>
+							<div id="tabelaFalsaPosicao" class="tab"></div>
+						</div>
+						<div id="tabSecante" class="tab">
+							<div class="row mb-3">
+								<p class="pp col-4">Intervalo Inicial</p>
+								<div class="col">
+									<span>[</span>
+									<input id="inicioSecante" type="number" placeholder="2,345" value="2.345" style="width: 40%"/>
+									<span>,</span>
+									<input id="fimSecante" type="number" placeholder="2,361" value="2.361" style="width: 40%"/>
+									<span>]</span>
+								</div>
+							</div>
+							<div class="row mb-3">
+								<p class="pp col-2">Precisão</p>
+								<div class="col" style="align-self: center">
+									<select id="precisaoSecante" class="form-select" style="width: 40px">
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6" selected>6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
+										<option value="9">9</option>
+										<option value="10">10</option>
+										<option value="11">11</option>
+										<option value="12">12</option>
+										<option value="13">13</option>
+										<option value="14">14</option>
+										<option value="15">15</option>
+									</select>
+									<span> casas decimais</span>
+								</div>
+								<div class="col-3">
+									<button id="calcular" class="btn btn-text" onclick="secante()">Calcular</button>
+								</div>
+							</div>
+							<div id="divIteracaoSecante" class="tab row mb-3">
+								<p class="pp col-4">Iteração</p>
+								<div class="col">
+									<button class="btn p-0" onclick="atualizarIteracaoSecante(-1)"><i class="fas fa-arrow-left"></i></button>
+									<input id="iteracaoSecante" type="number" value="1" min="1" style="width: 60px; text-align: center" onchange="iteracaoChangeSecante()"/>
+									<button class="btn p-0" onclick="atualizarIteracaoSecante(1)"><i class="fas fa-arrow-right"></i></button>
+								</div>
+							</div>
+							<div id="plotSecante"></div>
+							<div id="tabelaSecante" class="tab"></div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -223,5 +325,7 @@
 	<script src="js/index.js"></script>
 	<script src="js/bisseccao.js"></script>
 	<script src="js/newton.js"></script>
+	<script src="js/falsa-posicao.js"></script>
+	<script src="js/secante.js"></script>
 </body>
 </html>
