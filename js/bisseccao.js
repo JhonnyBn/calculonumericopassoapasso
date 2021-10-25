@@ -64,8 +64,8 @@ function iteracaoChangeBisseccao() {
 
 function graficoBisseccaoDaIteracao() {
 	const expressao = document.getElementById('expr').value
-	const inicio = document.getElementById('inicioBisseccao').value
-	const fim = document.getElementById('fimBisseccao').value
+	const inicio = document.getElementById('inicio').value
+	const fim = document.getElementById('fim').value
 	const iteracao = parseInt(document.getElementById('iteracaoBisseccao').value)
 	const resultado = document.querySelectorAll("#tabelaBisseccao > table > tbody > tr:nth-child(" + ( iteracao + 1 ) + ") > td")
 	const a = parseFloat(resultado[1].textContent)
