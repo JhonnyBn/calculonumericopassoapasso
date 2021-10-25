@@ -45,86 +45,15 @@ function toggle(elemId) {
 }
 
 function clearZoom() {
-	penultimoZoom = ultimoZoom
 	ultimoZoom = {
 		"xaxis.autorange": true,
 		"yaxis.autorange": true
 	}
 }
 
-function graficoFx(elemId, expressao, limites, pontos, traces) {
-	let data = []
-	let pontosTrace = []
-	if(Array.isArray(expressao)) {
-		const xValues = math.range(limites[0], limites[1], (limites[1] - limites[0]) / 10000 ).toArray()
-		for (exp of expressao) {
-			const funcao = math.parse(exp)
-			const f = funcao.compile()
-			
-			const yValuesFuncao = xValues.map(function (x) {
-				return f.evaluate({x: x})
-			})
-
-			const trace = {
-				x: xValues,
-				y: yValuesFuncao,
-				type: 'scatter',
-				name: 'função'
-			}
-			data.push(trace)
-		}
-		
-		if (pontos) {
-			const funcao = math.parse(expressao[0])
-			const f = funcao.compile()
-			pontosTrace.push({
-				x: pontos.map((x) => { return x.x }),
-				y: pontos.map((x) => { return f.evaluate({x: x.x}) }),
-				type: 'scatter',
-				mode: 'markers+text',
-				marker: {
-					size: 10
-				},
-				text: pontos.map((x) => { return x.nome }),
-				textposition: 'top',
-				name: 'Pontos de Interesse'
-			})
-		}
-	}
-	else {
-		const funcao = math.parse(expressao)
-		const f = funcao.compile()
-		
-		const xValues = math.range(limites[0], limites[1], (limites[1] - limites[0]) / 10000 ).toArray()
-		const yValuesFuncao = xValues.map(function (x) {
-			return f.evaluate({x: x})
-		})
-
-		const trace1 = {
-			x: xValues,
-			y: yValuesFuncao,
-			type: 'scatter',
-			name: 'função'
-		}
-		data = [trace1]
-
-		if (pontos) {
-			pontosTrace.push({
-				x: pontos.map((x) => { return x.x }),
-				y: pontos.map((x) => { return f.evaluate({x: x.x}) }),
-				type: 'scatter',
-				mode: 'markers+text',
-				marker: {
-					size: 10
-				},
-				text: pontos.map((x) => { return x.nome }),
-				textposition: 'top',
-				name: 'Pontos de Interesse'
-			})
-		}
-	}
-	
-	layout = {
+function graficoFx(elemId, expressao, limites, pontos=[], traces=[]) {
+	const plot = document.getElementById(elemId)
+	const layout = {
 		autosize: true,
 		hovermode: 'closest',
 		showlegend: false,
@@ -135,31 +64,53 @@ function graficoFx(elemId, expressao, limites, pontos, traces) {
 			r: 50
 		}
 	}
-	config = {
-		responsive: true,
-		displayModeBar: true,
-		displaylogo: false,
-		modeBarButtonsToRemove: ['select2d', 'lasso2d']
-	}
+	const funcao = math.parse(expressao)
+	const f = funcao.compile()
+	const valoresX = math.range(limites[0], limites[1], (limites[1] - limites[0]) / 10000 ).toArray()
+	const valoresY = valoresX.map(function (x) {
+		return f.evaluate({x: x})
+	})
+	let data = [{
+		x: valoresX,
+		y: valoresY,
+		type: 'scatter',
+		name: 'função'
+	}]
 	
 	if(traces) {
 		data.push(...traces)
 	}
-	if(pontos) {
-		data.push(...pontosTrace)
-	}
 
-	plot = document.getElementById(elemId)
+	if (pontos) {
+		data.push({
+			x: pontos.map((x) => { return x.x }),
+			y: pontos.map((x) => { return f.evaluate({x: x.x}) }),
+			type: 'scatter',
+			name: 'Pontos de Interesse',
+			text: pontos.map((x) => { return x.nome }),
+			textposition: 'top',
+			mode: 'markers+text',
+			marker: {
+				size: 10
+			}
+		})
+	}
 	
+	// se o plot ja foi criado
 	if(plot.calcdata) {
 		Plotly.react(elemId, data, layout)
 		Plotly.relayout(plot, ultimoZoom)
 	}
 	else {
+		const config = {
+			responsive: true,
+			displayModeBar: true,
+			displaylogo: false,
+			modeBarButtonsToRemove: ['select2d', 'lasso2d']
+		}
 		Plotly.newPlot(elemId, data, layout, config)
 		plot.on("plotly_relayout", (e) => {
 			if(e != ultimoZoom) {
-				penultimoZoom = ultimoZoom
 				ultimoZoom = e
 			}
 		})
