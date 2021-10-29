@@ -82,9 +82,11 @@ function graficoSecanteDaIteracao() {
 		{nome: 'x2', x: x2},
 		{nome: 'x1', x: x1}
 	]
+	let min = Math.min(x0, x1, x2)
+	let max = Math.max(x0, x1, x2)
 	let traces = [{
-		x: [x0, x1],
-		y: [f(x0), f(x1)], 	
+		x: [min, max],
+		y: [f(min), f(max)], 	
 		type: 'lines'
 	}, {
 		x: [x0, x0],
