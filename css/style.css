@@ -93,6 +93,11 @@ p.pp {
     align-self: center;
 }
 
+.centralize {
+    display: flex;
+    align-items: center;
+}
+
 /* ---------------------------------------------------
     SIDEBAR STYLE
 ----------------------------------------------------- */
