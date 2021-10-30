@@ -41,7 +41,7 @@ function clearZoom() {
 	}
 }
 
-function graficoFx(elemId, expressao, limites, pontos=[], traces=[]) {
+function graficoFx(elemId, expressao, limites, pontos=[], traces=[], expressoes=[]) {
 	const plot = document.getElementById(elemId)
 	const layout = {
 		autosize: true,
@@ -56,7 +56,7 @@ function graficoFx(elemId, expressao, limites, pontos=[], traces=[]) {
 	}
 	const funcao = math.parse(expressao)
 	const f = funcao.compile()
-	const valoresX = math.range(limites[0], limites[1], (limites[1] - limites[0]) / 10000 ).toArray()
+	const valoresX = math.range(limites[0], limites[1], (limites[1] - limites[0]) / 10000, true).toArray()
 	const valoresY = valoresX.map(function (x) {
 		return f.evaluate({x: x})
 	})
@@ -69,6 +69,21 @@ function graficoFx(elemId, expressao, limites, pontos=[], traces=[]) {
 	
 	if(traces) {
 		data.push(...traces)
+	}
+
+	if(expressoes) {
+		for (exp of expressoes) {
+			let limites = exp.limites
+			let valoresX = math.range(limites[0], limites[1], (limites[1] - limites[0]) / 10000, true).toArray()
+			let parsed = math.parse(exp.expressao)
+			let compiled = parsed.compile()
+			data.push({
+				x: valoresX,
+				y: valoresX.map((x) => { return compiled.evaluate({x: x}) }),
+				type: 'scatter',
+				name: exp.nome || ""
+			})
+		}
 	}
 
 	if (pontos) {
@@ -105,6 +120,11 @@ function graficoFx(elemId, expressao, limites, pontos=[], traces=[]) {
 			}
 		})
 	}
+}
+
+function eqReta([x0,y0], [x1,y1]) {
+	// retorna a equacao da reta entre dois pontos
+	return "((" + y1 + "-" + y0 + ")/(" + x1 + "-" + x0 + "))*(x-" + x0 + ")+" + y0
 }
 
 function atualizarFuncao() {

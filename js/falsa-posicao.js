@@ -80,25 +80,12 @@ function graficoFalsaPosicaoDaIteracao() {
 		{nome: 'c', x: c},
 		{nome: 'b', x: b}
 	]
-	let trace1 = {
-		x: [a, b],
-		y: [f(a), f(b)],
-		type: 'lines'
-	}
-	if (c > a && c > b)
-		trace1 = {
-			x: [a, c],
-			y: [f(a), 0],
-			type: 'lines'
-		}
-	else if (c < a)
-		trace1 = {
-			x: [b, c],
-			y: [f(b), 0],
-			type: 'lines'
-		}
-	let traces = [
-		trace1, {
+	let expressoes = [{
+		"expressao": eqReta([a, f(a)], [b, f(b)]),
+		"limites": [Math.min(a, b, c), Math.max(a, b, c)],
+		"nome": ''
+	}]
+	let traces = [{
 		x: [a, a],
 		y: [0, f(a)],
 		type: 'lines',
@@ -126,7 +113,7 @@ function graficoFalsaPosicaoDaIteracao() {
 			dash: 'dot'
 		}
 	}]
-	graficoFx('plotFalsaPosicao', expressao, [inicio, fim], pontos, traces)
+	graficoFx('plotFalsaPosicao', expressao, [inicio, fim], pontos, traces, expressoes)
 }
 
 function graficoFalsaPosicaoDaLinha(elem) {

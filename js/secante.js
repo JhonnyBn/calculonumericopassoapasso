@@ -80,25 +80,12 @@ function graficoSecanteDaIteracao() {
 		{nome: 'x2', x: x2},
 		{nome: 'x1', x: x1}
 	]
-	let trace1 = {
-		x: [x0, x1],
-		y: [f(x0), f(x1)],
-		type: 'lines'
-	}
-	if (x2 > x0 && x2 > x1)
-		trace1 = {
-			x: [x0, x2],
-			y: [f(x0), 0],
-			type: 'lines'
-		}
-	else if (x2 < x0)
-		trace1 = {
-			x: [x1, x2],
-			y: [f(x1), 0],
-			type: 'lines'
-		}
-	let traces = [
-		trace1, {
+	let expressoes = [{
+		"expressao": eqReta([x0, f(x0)], [x1, f(x1)]),
+		"limites": [Math.min(x0, x1, x2), Math.max(x0, x1, x2)],
+		"nome": ''
+	}]
+	let traces = [{
 		x: [x0, x0],
 		y: [0, f(x0)],
 		type: 'lines',
@@ -126,7 +113,7 @@ function graficoSecanteDaIteracao() {
 			dash: 'dot'
 		}
 	}]
-	graficoFx('plotSecante', expressao, [inicio, fim], pontos, traces)
+	graficoFx('plotSecante', expressao, [inicio, fim], pontos, traces, expressoes)
 }
 
 function graficoSecanteDaLinha(elem) {

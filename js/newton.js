@@ -50,34 +50,6 @@ function newton() {
 	graficoNewtonDaIteracao()
 }
 
-function graficoNewton(elementos) {
-    const expressao = document.getElementById('expr').value
-	const inicio = document.getElementById('inicio').value
-	const fim = document.getElementById('fim').value
-	//const iteracao = document.getElementById('iteracaoNewton').value
-	//const resultado = document.querySelectorAll("#tabelaNewton > table > tbody > tr:nth-child(" + iteracao + ") > td")
-    let pontos = [
-        {nome: 'x0', x: elementos[0][2]},
-    ]
-    let i = 1
-    for (linha of elementos) {
-        pontos.push({nome: 'x' + i, x: linha[1]})
-        i++
-    }
-	traces = []
-	const funcao = math.parse(expressao)
-	const funcaoCompilada = funcao.compile()
-	let f = (x) => { return funcaoCompilada.evaluate({x: x}) }
-	for(i = 1; i < pontos.length; i++) {
-		traces.push({
-			x: [pontos[i-1].x, pontos[i].x],
-			y: [f(pontos[i-1].x), 0],
-			type: 'lines'
-		})
-	}
-	graficoFx('plotNewton', expressao, [inicio, fim], pontos, traces)
-}
-
 function atualizarIteracaoNewton(delta) {
 	const iteracao = document.getElementById('iteracaoNewton')
 	const max = document.querySelectorAll("#tabelaNewton > table > tbody > tr").length - 1
@@ -107,22 +79,19 @@ function graficoNewtonDaIteracao() {
 	const inicio = document.getElementById('inicio').value
 	const fim = document.getElementById('fim').value
 	const iteracao = parseInt(document.getElementById('iteracaoNewton').value)
-	const resultado = document.querySelectorAll("#tabelaNewton > table > tbody > tr:nth-child(" + ( iteracao + 1)  + ") > td")
-	let x = parseFloat(resultado[1].textContent)
-	let x1 = parseFloat(resultado[2].textContent)
-	/*
+	
 	let pontos = []
 	let traces = []
+	let expressoes = []
 	for (etapa of elementosNewton) {
 		let xNumero = etapa[0]
 		x = etapa[1]
 		x1 = etapa[2]
 		pontos.push({nome: 'x' + xNumero, x: x})
-		traces.push({
-			x: [x, x1],
-			y: [f(x), 0],
-			type: 'lines',
-			name: 'tangente'
+		expressoes.push({
+			"expressao": eqReta([x, f(x)], [x1, 0]),
+			"limites": [Math.min(x, x1), Math.max(x, x1)],
+			"nome": 'tangente de x' + xNumero
 		})
 		traces.push({
 			x: [x1, x1],
@@ -134,32 +103,13 @@ function graficoNewtonDaIteracao() {
 				dash: 'dot'
 			}
 		})
-		if(xNumero > iteracao) {
+		if(xNumero >= iteracao) {
 			pontos.push({nome: 'x' + (xNumero + 1), x: x1})
 			break
 		}
 	}
-	*/
-	const pontos = [
-		{nome: 'x0', x: x},
-		{nome: 'x1', x: x1}
-	]
-	let traces = [{
-		x: [x, x1],
-		y: [f(x), 0],
-		type: 'lines',
-		name: 'tangente'
-	}, {
-		x: [x1, x1],
-		y: [0, f(x1)],
-		type: 'lines',
-		name: '',
-		line: {
-			color: 'gray',
-			dash: 'dot'
-		}
-	}]
-	graficoFx('plotNewton', expressao, [inicio, fim], pontos, traces)
+	
+	graficoFx('plotNewton', expressao, [inicio, fim], pontos, traces, expressoes)
 }
 
 function graficoNewtonDaLinha(elem) {
