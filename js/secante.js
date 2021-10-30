@@ -23,9 +23,6 @@ function secante() {
 				return
 			}
 			let x2 = math.round((x1-f(x1)*((x1-x0)/(f(x1)-f(x0)))), p)
-			if(iteracao < 50) {
-				console.log(iteracao, x0, x2, x1, f(x0), f(x2), f(x1), err)
-			}
 			elementos.push([iteracao, x0, x2, x1, sinal(f(x0)), sinal(f(x2)), sinal(f(x1)), math.round(x0-x2, p), math.round(x1-x2, p), math.round(f(x2), p)])
 			if (math.abs(x1-x2) < err || math.abs(x0-x2) < err) {
 				break
@@ -82,8 +79,6 @@ function graficoSecanteDaIteracao() {
 		{nome: 'x2', x: x2},
 		{nome: 'x1', x: x1}
 	]
-	let min = Math.min(x0, x1, x2)
-	let max = Math.max(x0, x1, x2)
 	let trace1 = {
 		x: [x0, x1],
 		y: [f(x0), f(x1)],

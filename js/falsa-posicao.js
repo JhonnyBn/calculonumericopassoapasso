@@ -23,9 +23,6 @@ function falsaPosicao() {
 				return
 			}
 			let x = math.round(((a*f(b)-b*f(a))/(f(b)-f(a))), p)
-			if(iteracao < 50) {
-				console.log(iteracao, a, x, b, f(a), f(x), f(b), err)
-			}
 			elementos.push([iteracao, a, x, b, sinal(f(a)), sinal(f(x)), sinal(f(b)), math.round(a-x, p), math.round(b-x, p), math.round(f(x), p)])
 			if (math.abs(b-x) < err || math.abs(a-x) < err) {
 				break
@@ -82,11 +79,25 @@ function graficoFalsaPosicaoDaIteracao() {
 		{nome: 'c', x: c},
 		{nome: 'b', x: b}
 	]
-	let traces = [{
+	let trace1 = {
 		x: [a, b],
-		y: [f(a), f(b)], 	
+		y: [f(a), f(b)],
 		type: 'lines'
-	}, {
+	}
+	if (c > a && c > b)
+		trace1 = {
+			x: [a, c],
+			y: [f(a), 0],
+			type: 'lines'
+		}
+	else if (c < a)
+		trace1 = {
+			x: [b, c],
+			y: [f(b), 0],
+			type: 'lines'
+		}
+	let traces = [
+		trace1, {
 		x: [a, a],
 		y: [0, f(a)],
 		type: 'lines',

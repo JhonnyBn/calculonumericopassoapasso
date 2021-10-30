@@ -23,8 +23,6 @@ function newton() {
 			}
             let y = f(x)
 			let x1 = math.round(x - y/derivada3(x), p)
-            //let tan = "("+derivada3(x)+"*(x-"+x+")-"+y+")"
-			//let tan = x1 + "x + " + x1
 			elementos.push([
                 iteracao,
                 x,

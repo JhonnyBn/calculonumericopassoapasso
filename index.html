@@ -92,15 +92,15 @@
 							<p class="pp col-3">Intervalo do Gráfico</p>
 							<div class="col centralize">
 								<span>[</span>
-								<input id="inicio" type="number" placeholder="0" value="0" style="width: 40%" onchange="atualizarGrafico()"/>
+								<input id="inicio" type="number" step="any" value="0" style="width: 40%" onchange="atualizarGrafico()"/>
 								<span>,</span>
-								<input id="fim" type="number" placeholder="10" value="10" style="width: 40%" onchange="atualizarGrafico()"/>
+								<input id="fim" type="number" step="any" value="10" style="width: 40%" onchange="atualizarGrafico()"/>
 								<span>]</span>
 							</div>
 						</div>
 						<div class="row">
 							<p class="pp col-2">Função</p>
-							<div id="funcao" class="col">$$$$</div>
+							<div id="funcao" class="col centralize" style="justify-content: center;">$$$$</div>
 							<span class="col-2"></span>
 						</div>
 					</div>
@@ -131,9 +131,9 @@
 								<p class="pp col-4">Intervalo Inicial do Método</p>
 								<div class="col centralize">
 									<span>[</span>
-									<input id="inicioBisseccao" type="number" placeholder="2,345" value="2.345" style="width: 40%"/>
+									<input id="inicioBisseccao" type="number" step="any" placeholder="2,345" value="2.345" style="width: 40%"/>
 									<span>,</span>
-									<input id="fimBisseccao" type="number" placeholder="2,361" value="2.361" style="width: 40%"/>
+									<input id="fimBisseccao" type="number" step="any" placeholder="2,361" value="2.361" style="width: 40%"/>
 									<span>]</span>
 								</div>
 							</div>
@@ -163,12 +163,15 @@
 									<button class="btn btn-text" onclick="bisseccao()">Calcular</button>
 								</div>
 							</div>
-							<div id="divIteracaoBisseccao" class="tab row mb-3">
-								<p class="pp col-4">Iteração</p>
-								<div class="col">
+							<div id="divIteracaoBisseccao" class="borda-escura tab row py-2 mb-3">
+								<p class="pp col-2">Iteração</p>
+								<div class="col centralize">
 									<button class="btn p-0" onclick="atualizarIteracaoBisseccao(-1)"><i class="fas fa-arrow-left"></i></button>
-									<input id="iteracaoBisseccao" type="number" value="1" min="1" style="width: 60px; text-align: center" onchange="iteracaoChangeBisseccao()"/>
+									<input id="iteracaoBisseccao" type="number" min="0" step="1" style="width: 60px; text-align: center" onchange="iteracaoChangeBisseccao()"/>
 									<button class="btn p-0" onclick="atualizarIteracaoBisseccao(1)"><i class="fas fa-arrow-right"></i></button>
+								</div>
+								<div class="col-2 mx-2">
+									<button class="btn btn-text" onclick="window.scrollTo(0,800)">Tabela</button>
 								</div>
 							</div>
 							<div id="plotBisseccao"></div>
@@ -176,8 +179,13 @@
 						</div>
 						<div id="tabNewton" class="tab">
 							<div class="row mb-3">
+								<p class="pp col-2">Derivada</p>
+								<div id="derivada" class="col centralize" style="justify-content: center;">$$$$</div>
+								<span class="col-2"></span>
+							</div>
+							<div class="row mb-3">
 								<p class="pp col-4">Aproximação Inicial</p>
-								<input id="aprox" type="number" placeholder="2,3" value="2.3" class="col"/>
+								<input id="aprox" type="number" step="any" placeholder="2,3" value="2.3" class="col"/>
 							</div>
 							<div class="row mb-3">
 								<p class="pp col-2">Precisão</p>
@@ -205,12 +213,15 @@
 									<button id="calcular" class="btn btn-text" onclick="newton()">Calcular</button>
 								</div>
 							</div>
-							<div id="divIteracaoNewton" class="tab row mb-3">
-								<p class="pp col-4">Iteração</p>
-								<div class="col">
+							<div id="divIteracaoNewton" class="borda-escura tab row py-2 mb-3">
+								<p class="pp col-2">Iteração</p>
+								<div class="col centralize">
 									<button class="btn p-0" onclick="atualizarIteracaoNewton(-1)"><i class="fas fa-arrow-left"></i></button>
-									<input id="iteracaoNewton" type="number" value="1" min="1" style="width: 60px; text-align: center" onchange="iteracaoChangeNewton()"/>
+									<input id="iteracaoNewton" type="number" min="0" step="1" style="width: 60px; text-align: center" onchange="iteracaoChangeNewton()"/>
 									<button class="btn p-0" onclick="atualizarIteracaoNewton(1)"><i class="fas fa-arrow-right"></i></button>
+								</div>
+								<div class="col-2 mx-2">
+									<button class="btn btn-text" onclick="window.scrollTo(0,800)">Tabela</button>
 								</div>
 							</div>
 							<div id="plotNewton"></div>
@@ -221,9 +232,9 @@
 								<p class="pp col-4">Intervalo Inicial do Método</p>
 								<div class="col centralize">
 									<span>[</span>
-									<input id="inicioFalsaPosicao" type="number" placeholder="2,345" value="2.345" style="width: 40%"/>
+									<input id="inicioFalsaPosicao" type="number" step="any" placeholder="2,345" value="2.345" style="width: 40%"/>
 									<span>,</span>
-									<input id="fimFalsaPosicao" type="number" placeholder="2,361" value="2.361" style="width: 40%"/>
+									<input id="fimFalsaPosicao" type="number" step="any" placeholder="2,361" value="2.361" style="width: 40%"/>
 									<span>]</span>
 								</div>
 							</div>
@@ -253,12 +264,15 @@
 									<button id="calcular" class="btn btn-text" onclick="falsaPosicao()">Calcular</button>
 								</div>
 							</div>
-							<div id="divIteracaoFalsaPosicao" class="tab row mb-3">
-								<p class="pp col-4">Iteração</p>
-								<div class="col">
+							<div id="divIteracaoFalsaPosicao" class="borda-escura tab row py-2 mb-3">
+								<p class="pp col-2">Iteração</p>
+								<div class="col centralize">
 									<button class="btn p-0" onclick="atualizarIteracaoFalsaPosicao(-1)"><i class="fas fa-arrow-left"></i></button>
-									<input id="iteracaoFalsaPosicao" type="number" value="1" min="1" style="width: 60px; text-align: center" onchange="iteracaoChangeFalsaPosicao()"/>
+									<input id="iteracaoFalsaPosicao" type="number" min="0" step="1" style="width: 60px; text-align: center" onchange="iteracaoChangeFalsaPosicao()"/>
 									<button class="btn p-0" onclick="atualizarIteracaoFalsaPosicao(1)"><i class="fas fa-arrow-right"></i></button>
+								</div>
+								<div class="col-2 mx-2">
+									<button class="btn btn-text" onclick="window.scrollTo(0,800)">Tabela</button>
 								</div>
 							</div>
 							<div id="plotFalsaPosicao"></div>
@@ -269,9 +283,9 @@
 								<p class="pp col-4">Intervalo Inicial do Método</p>
 								<div class="col centralize">
 									<span>[</span>
-									<input id="inicioSecante" type="number" placeholder="2,345" value="2.345" style="width: 40%"/>
+									<input id="inicioSecante" type="number" step="any" placeholder="2,345" value="2.345" style="width: 40%"/>
 									<span>,</span>
-									<input id="fimSecante" type="number" placeholder="2,361" value="2.361" style="width: 40%"/>
+									<input id="fimSecante" type="number" step="any" placeholder="2,361" value="2.361" style="width: 40%"/>
 									<span>]</span>
 								</div>
 							</div>
@@ -301,12 +315,15 @@
 									<button id="calcular" class="btn btn-text" onclick="secante()">Calcular</button>
 								</div>
 							</div>
-							<div id="divIteracaoSecante" class="tab row mb-3">
-								<p class="pp col-4">Iteração</p>
-								<div class="col">
+							<div id="divIteracaoSecante" class="borda-escura tab row py-2 mb-3">
+								<p class="pp col-2">Iteração</p>
+								<div class="col centralize">
 									<button class="btn p-0" onclick="atualizarIteracaoSecante(-1)"><i class="fas fa-arrow-left"></i></button>
-									<input id="iteracaoSecante" type="number" value="1" min="1" style="width: 60px; text-align: center" onchange="iteracaoChangeSecante()"/>
+									<input id="iteracaoSecante" type="number" min="0" step="1" style="width: 60px; text-align: center" onchange="iteracaoChangeSecante()"/>
 									<button class="btn p-0" onclick="atualizarIteracaoSecante(1)"><i class="fas fa-arrow-right"></i></button>
+								</div>
+								<div class="col-2 mx-2">
+									<button class="btn btn-text" onclick="window.scrollTo(0,800)">Tabela</button>
 								</div>
 							</div>
 							<div id="plotSecante"></div>

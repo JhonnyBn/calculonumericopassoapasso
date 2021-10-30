@@ -130,10 +130,26 @@ function atualizarFuncao() {
 		let funcaoElem = document.getElementById('funcao')
 		funcaoElem.innerHTML = '$$' + funcaoLatex + '$$'
 		MathJax.typeset()
-		
+
+		atualizarDerivada()
 		atualizarGrafico()
 	}
 	catch (err) {}
+}
+
+function atualizarDerivada() {
+	try {
+		let expressao = document.getElementById('expr').value
+		let funcao = math.parse(expressao)
+		let derivada = math.derivative(funcao, 'x')
+		let derivadaLatex = derivada.toTex()
+		let derivadaElem = document.getElementById('derivada')
+		derivadaElem.innerHTML = '$$' + derivadaLatex + '$$'
+		MathJax.typeset()
+	}
+	catch (err) {
+		document.getElementById('derivada').innerHTML = "Erro ao calcular a derivada"
+	}
 }
 
 function atualizarGrafico() {
@@ -142,6 +158,12 @@ function atualizarGrafico() {
 	let fim = document.getElementById('fim').value
 	clearZoom()
 	graficoFx('plot' + pagina, expressao, [inicio, fim])
+	/*switch(pagina) {
+		case 'Bisseccao': graficoBisseccaoDaIteracao();
+		case 'Newton': graficoNewtonDaIteracao();
+		case 'FalsaPosicao': graficoFalsaPosicaoDaIteracao();
+		case 'Secante': graficoSecanteDaIteracao();
+	}*/
 }
 
 function atualizarComparar() {
