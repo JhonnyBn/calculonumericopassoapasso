@@ -263,11 +263,11 @@ document.addEventListener('DOMContentLoaded', function() {
 	abrirPagina("Principal")
 	//compararMetodos("Bisseccao", "Newton")
 
-	// Configura a Scrollbar lateral
+	/*/ Configura a Scrollbar lateral
 	$("#sidebar").mCustomScrollbar({
 		theme: "minimal",
 		scrollInertia: 300
-	})
+	})*/
 
 	$('#sidebarCollapse').on('click', function () {
 		$('#sidebar, #page').toggleClass('active')

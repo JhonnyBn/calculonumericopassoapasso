@@ -147,6 +147,10 @@ p.pp {
     padding: 20px 0;
 }
 
+#sidebar .sidebar-footer {
+    padding: 20px 0;
+}
+
 #sidebar a,
 #sidebar a:hover,
 #sidebar a:focus {
@@ -190,22 +194,16 @@ a[data-toggle="collapse"] {
     padding-left: 30px !important;
 }
 
-#sidebar ul.CTAs {
+#sidebar ul.sidebar-buttons {
     padding: 20px;
 }
 
-#sidebar ul.CTAs a {
+#sidebar ul.sidebar-buttons a {
     text-align: center;
     font-size: 0.9em !important;
     display: block;
     border-radius: 5px;
     margin-bottom: 5px;
-}
-
-a.logout,
-a.logout:hover {
-    background: var(--primary-normal) !important;
-    color: #fff !important;
 }
 
 /* ---------------------------------------------------
