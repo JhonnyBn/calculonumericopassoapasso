@@ -96,6 +96,7 @@ function graficoFx(elemId, expressao, limites, pontos=[], traces=[], expressoes=
 			textposition: 'top',
 			mode: 'markers+text',
 			marker: {
+				color: '#ff7f0e',
 				size: 10
 			}
 		})

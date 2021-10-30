@@ -36,6 +36,7 @@ function bisseccao() {
 	document.getElementById("divIteracaoBisseccao").style.display = ''
 	let cabecalho = ["Iteração", "a", "c", "b", "f(a)", "f(c)", "f(b)", "b-c", "f(c)"]
 	let opcoes = [{ "name": "Mostrar Gráfico", "action": "graficoBisseccaoDaLinha(this)" }]
+	elementosBisseccao = elementos
 	tabela('tabelaBisseccao', cabecalho, elementos, opcoes)
 	show("tabelaBisseccao")
 	clearZoom()
@@ -77,6 +78,35 @@ function graficoBisseccaoDaIteracao() {
 		{nome: 'c', x: c},
 		{nome: 'b', x: b}
 	]
+	/*
+	let pontos = []
+	let traces = []
+	let expressoes = []
+	for (etapa of elementosBisseccao) {
+		let xNumero = etapa[0]
+		x = etapa[2]
+		pontos.push({nome: 'x' + xNumero, x: x})
+		expressoes.push({
+			"expressao": eqReta([x, f(x)], [x1, 0]),
+			"limites": [Math.min(x, x1), Math.max(x, x1)],
+			"nome": 'tangente de x' + xNumero
+		})
+		traces.push({
+			x: [x1, x1],
+			y: [0, f(x1)],
+			type: 'lines',
+			name: '',
+			line: {
+				color: 'gray',
+				dash: 'dot'
+			}
+		})
+		if(xNumero >= iteracao) {
+			pontos.push({nome: 'x' + (xNumero + 1), x: x1})
+			break
+		}
+	}*/
+
 	graficoFx('plotBisseccao', expressao, [inicio, fim], pontos)
 }
 

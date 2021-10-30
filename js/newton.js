@@ -79,7 +79,31 @@ function graficoNewtonDaIteracao() {
 	const inicio = document.getElementById('inicio').value
 	const fim = document.getElementById('fim').value
 	const iteracao = parseInt(document.getElementById('iteracaoNewton').value)
-	
+	const resultado = document.querySelectorAll("#tabelaNewton > table > tbody > tr:nth-child(" + ( iteracao + 1)  + ") > td")
+	let x = parseFloat(resultado[1].textContent)
+	let x1 = parseFloat(resultado[2].textContent)
+
+	const pontos = [
+		{nome: 'x0', x: x},
+		{nome: 'x1', x: x1}
+	]
+	let expressoes = [{
+		"expressao": eqReta([x, f(x)], [x1, 0]),
+		"limites": [Math.min(x, x1), Math.max(x, x1)],
+		"nome": 'tangente'
+	}]
+	let traces = [{
+		x: [x1, x1],
+		y: [0, f(x1)],
+		type: 'lines',
+		name: '',
+		line: {
+			color: 'gray',
+			dash: 'dot'
+		}
+	}]
+
+	/*
 	let pontos = []
 	let traces = []
 	let expressoes = []
@@ -108,6 +132,7 @@ function graficoNewtonDaIteracao() {
 			break
 		}
 	}
+	*/
 	
 	graficoFx('plotNewton', expressao, [inicio, fim], pontos, traces, expressoes)
 }
