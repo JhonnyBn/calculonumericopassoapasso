@@ -11,10 +11,11 @@ function secante() {
 	let iteracao = 0
 	let x0 = document.getElementById("inicioSecante").value
 	let x1 = document.getElementById("fimSecante").value
+	let err = document.getElementById("errBisseccao").value
 	let p = document.getElementById("precisaoSecante").value
 	try{
 		p = math.round(math.parse(p).evaluate(), 0)
-		err = math.parse('10^-' + p).evaluate()
+		err = math.parse(err).evaluate()
 		x0 = math.round(math.parse(x0).evaluate(), p)
 		x1 = math.round(math.parse(x1).evaluate(), p)
 		while(true) {

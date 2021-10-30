@@ -11,10 +11,11 @@ function bisseccao() {
 	let iteracao = 0
 	let a = document.getElementById("inicioBisseccao").value
 	let b = document.getElementById("fimBisseccao").value
+	let err = document.getElementById("errBisseccao").value
 	let p = document.getElementById("precisaoBisseccao").value
 	try{
 		p = math.round(math.parse(p).evaluate(), 0)
-		err = math.parse('10^-' + p).evaluate()
+		err = math.parse(err).evaluate()
 		a = math.round(math.parse(a).evaluate(), p)
 		b = math.round(math.parse(b).evaluate(), p)
 		while(true) {

@@ -11,10 +11,11 @@ function newton() {
 	let elementos = []
 	let iteracao = 0
 	let aprox = document.getElementById("aprox").value
+	let err = document.getElementById("errBisseccao").value
 	let p = document.getElementById("precisaoNewton").value
 	try{
 		p = math.round(math.parse(p).evaluate(), 0)
-		err = math.parse('10^-' + p).evaluate()
+		err = math.parse(err).evaluate()
 		x = math.round(math.parse(aprox).evaluate(), p)
 		while(true) {
 			if(iteracao > 1000) {

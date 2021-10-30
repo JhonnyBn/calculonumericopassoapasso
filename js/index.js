@@ -153,17 +153,19 @@ function atualizarDerivada() {
 }
 
 function atualizarGrafico() {
+	if (pagina !== "Principal") {
+		if (document.getElementById("divIteracao" + pagina).style.display === "") {
+			// Caso ja algum metodo ja tenha sido calculado,
+			// precisa ser calculado novamente
+			abrirPagina(pagina)
+			return
+		}
+	}
 	let expressao = document.getElementById('expr').value
 	let inicio = document.getElementById('inicio').value
 	let fim = document.getElementById('fim').value
 	clearZoom()
 	graficoFx('plot' + pagina, expressao, [inicio, fim])
-	/*switch(pagina) {
-		case 'Bisseccao': graficoBisseccaoDaIteracao();
-		case 'Newton': graficoNewtonDaIteracao();
-		case 'FalsaPosicao': graficoFalsaPosicaoDaIteracao();
-		case 'Secante': graficoSecanteDaIteracao();
-	}*/
 }
 
 function atualizarComparar() {
