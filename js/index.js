@@ -11,6 +11,9 @@ function abrirPagina(pagina){
 	pag.style.display = 'block'
 	
 	window.pagina = pagina
+	if (pagina !== "Principal") {
+		document.getElementById("navbarRightButton").style.display = 'block'
+	}
 	if (pagina === "Comparar") {
 		//atualizarComparar()
 		return
@@ -27,6 +30,10 @@ function botaoCarregando(button, isLoading) {
 	} else {
 		btn.classList.remove('running')
 	}
+}
+
+function abrirModal() {
+	$("#" + pagina + "Modal").modal('show');
 }
 
 function show(elemId) {

@@ -77,16 +77,25 @@
 					<i class="fas fa-align-left"></i>
 				</button>
 				<h5 id="title" class="col title">Página Principal</h2>
-				<div class="col-3 invisible"></div>
+				<!-- div class="col-3" style="justify-content: center;"><a data-toggle="modal" href="#funcoesModal"><i class="fas fa-question fa-lg" style="color: white"></i></a></div -->
+				<div class="col-3">
+					<button id="navbarRightButton" type="button" onclick="abrirModal()" class="tab btn btn-icon">
+						<i class="fas fa-question fa-lg" style="color: white"></i>	
+					</button>
+				</div>
 			</div>
 			<!-- content wrapper -->
 			<div id="outercontent">
 				<div style="max-height: 100%; width: 80%;">
 					<div>
-						<div class="row mb-3">
+						<div class="row mb-3 centralize">
 							<p class="pp col-2">f(x)=</p>
 							<input id="expr" type="text" class="col" onchange="atualizarFuncao()"/>
-							<span class="col-2"></span>
+							<div class="col-2" style="justify-content: center;">
+								<a data-toggle="modal" href="#funcoesModal">
+									<i class="fas fa-question" style="color: black"></i>
+								</a>
+							</div>
 						</div>
 						<div class="row">
 							<p class="pp col-3">Intervalo do Gráfico</p>
@@ -356,6 +365,161 @@
 		</div>
 	</div>
 	
+	<div id="funcoesModal" class="modal">
+		<div class="modal-content">
+			<div class="text-center">
+				<span class="close" title="Fechar" data-dismiss="modal">&times;</span>
+				<div class="p-3 m-3">
+					<p style="font-weight: 500">Digitando Funções Matemáticas</p>
+					<div>
+						<div class="row">
+							<div class="col borda-funcoes">
+								<span>$$x^5+4x^3+10$$ = x^5+4x^3+10</span>
+							</div>
+							<div class="col borda-funcoes">
+								<span>$$\dfrac{2x}{x+2}$$ = (2x)/(x+2)</span>
+							</div>
+							<div class="col borda-funcoes">
+								<span>$$e^{-x}$$ = e^(-x)</span>
+							</div>
+							<div class="col borda-funcoes">
+								<span>$$|x|$$ = abs(x)</span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col borda-funcoes">
+								<span>$$\sqrt{x}$$ = sqrt(x)</span>
+							</div>
+							<div class="col borda-funcoes">
+								<span>$$\sqrt[n]{x}$$ = x^(1/n)</span>
+							</div>
+							<div class="col borda-funcoes">
+								<span>$$\ln (x)$$ = log(x)</span>
+							</div>
+							<div class="col borda-funcoes">
+								<span>$$log_{10} (x)$$ = log10(x)</span>
+							</div>
+							<div class="col borda-funcoes">
+								<span>$$log_{n} (x)$$ = log(x, n)</span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col borda-funcoes">
+								<span>$$\sin x$$ = sin(x)</span>
+							</div>
+							<div class="col borda-funcoes">
+								<span>$$\cos x$$ = cos(x)</span>
+							</div>
+							<div class="col borda-funcoes">
+								<span>$$\tan x$$ = tan(x)</span>
+							</div>
+							<div class="col borda-funcoes">
+								<span>$$\cot x$$ = cot(x)</span>
+							</div>
+							<div class="col borda-funcoes">
+								<span>$$\sec x$$ = sec(x)</span>
+							</div>
+							<div class="col borda-funcoes">
+								<span>$$\csc x$$ = csc(x)</span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col borda-funcoes">
+								<span>$$\sin ^{-1} x$$ = asin(x)</span>
+							</div>
+							<div class="col borda-funcoes">
+								<span>$$\cos ^{-1} x$$ = acos(x)</span>
+							</div>
+							<div class="col borda-funcoes">
+								<span>$$\tan ^{-1} x$$ = atan(x)</span>
+							</div>
+							<div class="col borda-funcoes">
+								<span>$$\cot ^{-1} x$$ = acot(x)</span>
+							</div>
+							<div class="col borda-funcoes">
+								<span>$$\sec ^{-1} x$$ = asec(x)</span>
+							</div>
+							<div class="col borda-funcoes">
+								<span>$$\csc ^{-1} x$$ = acsc(x)</span>
+							</div>
+						</div>
+					</div>
+					<div style="margin-top: 20px; display: flex; justify-content: right;">
+						<a class="btn btn-text" href="https://mathjs.org/docs/reference/functions.html" target="_blank">Ver mais</a>
+						<button class="btn btn-text" style="margin-left: 20px" data-dismiss="modal">Fechar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div id="BisseccaoModal" class="modal">
+		<div class="modal-content">
+			<div class="text-center">
+				<span class="close" title="Fechar" data-dismiss="modal">&times;</span>
+				<div class="p-3 m-3">
+					<p style="font-weight: 500">Método da Bissecção</p>
+					<div>
+						<p>Teste</p>
+					</div>
+					<div style="margin-top: 20px; display: flex; justify-content: right;">
+						<button class="btn btn-text" data-dismiss="modal">Fechar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div id="NewtonModal" class="modal">
+		<div class="modal-content">
+			<div class="text-center">
+				<span class="close" title="Fechar" data-dismiss="modal">&times;</span>
+				<div class="p-3 m-3">
+					<p style="font-weight: 500">Método de Newton</p>
+					<div>
+						<p>Teste</p>
+					</div>
+					<div style="margin-top: 20px; display: flex; justify-content: right;">
+						<button class="btn btn-text" data-dismiss="modal">Fechar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div id="FalsaPosicaoModal" class="modal">
+		<div class="modal-content">
+			<div class="text-center">
+				<span class="close" title="Fechar" data-dismiss="modal">&times;</span>
+				<div class="p-3 m-3">
+					<p style="font-weight: 500">Método da Falsa Posição</p>
+					<div>
+						<p>Teste</p>
+					</div>
+					<div style="margin-top: 20px; display: flex; justify-content: right;">
+						<button class="btn btn-text" data-dismiss="modal">Fechar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+		
+	<div id="SecanteModal" class="modal">
+		<div class="modal-content">
+			<div class="text-center">
+				<span class="close" title="Fechar" data-dismiss="modal">&times;</span>
+				<div class="p-3 m-3">
+					<p style="font-weight: 500">Método das Secantes</p>
+					<div>
+						<p>Teste</p>
+					</div>
+					<div style="margin-top: 20px; display: flex; justify-content: right;">
+						<button class="btn btn-text" data-dismiss="modal">Fechar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<!-- jQuery Scroller CDN -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 
