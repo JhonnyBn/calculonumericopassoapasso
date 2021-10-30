@@ -16,13 +16,13 @@ p {
 }
 
 :root {
-	--primary-light: #646772/*#fce958*/;
+	--primary-light: #646772;
 	--primary-normal: #383b44;
-	--primary-dark: #353841/*#dec300*/;
-	--primary-darker: #2b2c30/*#968400*/;
-	--secondary-light: #51545e/*#ffd154*/;
-	--secondary-normal: #2a2d35/*#ffc72f*/;
-	--secondary-dark: #282a30/*#ffc107*/;
+	--primary-dark: #353841;
+	--primary-darker: #2b2c30;
+	--secondary-light: #51545e;
+	--secondary-normal: #2a2d35;
+	--secondary-dark: #282a30;
 }
 
 .bg-primary-normal {
@@ -41,13 +41,9 @@ p {
 	color: #fff;
 	font-weight: 500;
 	text-shadow: 0 0 5px #000;
-	background-color: var(--primary-light); /* #546167 */
-	border-color: var(--primary-normal); /* #37474f */
+	background-color: var(--primary-light);
+	border-color: var(--primary-normal);
 	transition: all 0.3s;
-}
-
-.btn-text.ld-over-inverse:before {
-	background: var(--primary-normal)
 }
 
 .btn-icon {
@@ -272,23 +268,6 @@ a[data-toggle="collapse"] {
 }
 
 /* ---------------------------------------------------
-    ALERTA STYLE
------------------------------------------------------ */
-
-.alerta {
-	max-width: 50%;
-	display: none;
-	position: fixed;
-	bottom: 5%;
-	right: 5%;
-	z-index: 1052;
-}
-
-.alerta > .close {
-	font-size: 1.5rem;
-}
-
-/* ---------------------------------------------------
     MODAL STYLE
 ----------------------------------------------------- */
 
@@ -330,4 +309,21 @@ a[data-toggle="collapse"] {
 .close:hover {
 	cursor: pointer;
 	color: red;
+}
+
+/* ---------------------------------------------------
+    ALERTA STYLE
+----------------------------------------------------- */
+
+.alerta {
+	max-width: 50%;
+	display: none;
+	position: fixed;
+	bottom: 5%;
+	right: 5%;
+	z-index: 1052;
+}
+
+.alerta > .close {
+	font-size: 1.5rem;
 }

@@ -6,30 +6,13 @@ function abrirPagina(pagina){
 	let nav = document.getElementById("nav" + pagina)
 	nav.classList.add('active')
 	document.getElementById("title").textContent = nav.textContent
-	let pag = document.getElementById("tab" + pagina)
-	//pag.classList.remove("col-6")
-	pag.style.display = 'block'
+	document.getElementById("tab" + pagina).style.display = 'block'
 	
 	window.pagina = pagina
 	if (pagina !== "Principal") {
 		document.getElementById("navbarRightButton").style.display = 'block'
 	}
-	if (pagina === "Comparar") {
-		//atualizarComparar()
-		return
-	}
 	atualizarGrafico()
-}
-
-// Ativa ou desativa o efeito de loading em botoes 
-function botaoCarregando(button, isLoading) {
-	btn = document.getElementById(button)
-	btn.disabled = isLoading
-	if(isLoading) {
-		btn.classList.add('running')
-	} else {
-		btn.classList.remove('running')
-	}
 }
 
 function abrirModal() {
@@ -124,11 +107,6 @@ function graficoFx(elemId, expressao, limites, pontos=[], traces=[]) {
 	}
 }
 
-function graficoFxExprId(elemId, exprId, limites, pontos) {
-	const expressao = document.getElementById(exprId).value
-	graficoFx(elemId, expressao, limites, pontos)
-}
-
 function atualizarFuncao() {
 	try {
 		let expressao = document.getElementById('expr').value
@@ -175,46 +153,6 @@ function atualizarGrafico() {
 	graficoFx('plot' + pagina, expressao, [inicio, fim])
 }
 
-function atualizarComparar() {
-	let expressao = document.getElementById('expr').value
-	let inicio = document.getElementById('inicio').value
-	let fim = document.getElementById('fim').value
-	graficoFx('plotComparar1', expressao, [inicio, fim])
-	graficoFx('plotComparar2', expressao, [inicio, fim])
-}
-
-function compararMetodos(metodo1, metodo2) {
-	window.metodo1 = metodo1
-	window.metodo2 = metodo2
-	let pag1 = document.getElementById("tab" + metodo1)
-	pag1.classList.add("col-6")
-	pag1.style.display = 'block'
-	let pag2 = document.getElementById("tab" + metodo2)
-	pag2.classList.add("col-6")
-	pag2.style.display = 'block'
-}
-
-function atualizarCompararMetodos(elem) {
-	let ordem = ["Bisseccao", "Newton"],
-	ordemElem = ordem.indexOf(elem.value),
-	om1 = ordem.indexOf(window.metodo1 || "Bisseccao"),
-	om2 = ordem.indexOf(window.metodo2 || "Newton")
-	
-	//if (ordemElem == om1 || ordemElem == om2)
-		//return
-	
-	if(ordemElem < om1)
-		window.metodo1 = elem.value
-	else if (ordemElem > om2)
-		window.metodo2 = elem.value
-	else
-		window.metodo1 = elem.value
-	
-	document.getElementById("compararMetodo1").value = metodo1
-	document.getElementById("compararMetodo2").value = metodo2
-	compararMetodos(metodo1,metodo2)
-}
-
 // Prepara o grafico inicial ao abrir a pagina
 function graficoInicial() {
 	let exprElem = document.getElementById('expr')
@@ -254,20 +192,13 @@ function tabela(tableId, title, data, opcoes) {
 	table.innerHTML = html
 }
 
-var penultimoZoom, ultimoZoom;
+var ultimoZoom;
 
 // Executa ao carregar a pagina
 document.addEventListener('DOMContentLoaded', function() {
     window.pagina = "Principal"
 	graficoInicial()
 	abrirPagina("Principal")
-	//compararMetodos("Bisseccao", "Newton")
-
-	/*/ Configura a Scrollbar lateral
-	$("#sidebar").mCustomScrollbar({
-		theme: "minimal",
-		scrollInertia: 300
-	})*/
 
 	$('#sidebarCollapse').on('click', function () {
 		$('#sidebar, #page').toggleClass('active')
