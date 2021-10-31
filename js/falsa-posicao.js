@@ -34,9 +34,10 @@ function falsaPosicao() {
 	} catch(e) { console.log(e) }
 	document.getElementById("iteracaoFalsaPosicao").value = 0
 	document.getElementById("divIteracaoFalsaPosicao").style.display = ''
-	let cabecalho = ["Iteração", "a", "c", "b", "f(a)", "f(c)", "f(b)", "a-c", "b-c", "f(c)"]
+	let cabecalho = ["Iteração", "$$a$$", "$$c$$", "$$b$$", "$$f(a)$$", "$$f(c)$$", "$$f(b)$$", "$$a-c$$", "$$b-c$$", "$$f(c)$$"]
 	let opcoes = [{ "name": "Mostrar Gráfico", "action": "graficoFalsaPosicaoDaLinha(this)" }]
 	tabela('tabelaFalsaPosicao', cabecalho, elementos, opcoes)
+	MathJax.typeset()
 	show("tabelaFalsaPosicao")
 	clearZoom()
 	graficoFalsaPosicaoDaIteracao()

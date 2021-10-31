@@ -34,10 +34,11 @@ function bisseccao() {
 	} catch(e) { console.log(e) }
 	document.getElementById("iteracaoBisseccao").value = 0
 	document.getElementById("divIteracaoBisseccao").style.display = ''
-	let cabecalho = ["Iteração", "a", "c", "b", "f(a)", "f(c)", "f(b)", "b-c", "f(c)"]
+	let cabecalho = ["Iteração", "$$a$$", "$$c$$", "$$b$$", "$$f(a)$$", "$$f(c)$$", "$$f(b)$$", "$$b-c$$", "$$f(c)$$"]
 	let opcoes = [{ "name": "Mostrar Gráfico", "action": "graficoBisseccaoDaLinha(this)" }]
 	elementosBisseccao = elementos
 	tabela('tabelaBisseccao', cabecalho, elementos, opcoes)
+	MathJax.typeset()
 	show("tabelaBisseccao")
 	clearZoom()
 	graficoBisseccaoDaIteracao()

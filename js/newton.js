@@ -41,10 +41,11 @@ function newton() {
 	} catch(e) { console.log(e) }
 	document.getElementById("iteracaoNewton").value = 0
 	document.getElementById("divIteracaoNewton").style.display = ''
-    let cabecalho = ["Iteração", "x0", "x1", "|f(x1)|", "|x1-x0|", "f(x)", "f'(x)"]
+    let cabecalho = ["Iteração", "$$x_0$$", "$$x_1$$", "$$|f(x_1)|$$", "$$|x_1-x_0|$$", "$$f(x)$$", "$$f'(x)$$"]
 	let opcoes = [{ "name": "Mostrar Gráfico", "action": "graficoNewtonDaLinha(this)" }]
-	tabela('tabelaNewton', cabecalho, elementos, opcoes)
 	elementosNewton = elementos
+	tabela('tabelaNewton', cabecalho, elementos, opcoes)
+	MathJax.typeset()
     show("tabelaNewton")
 	clearZoom()
 	graficoNewtonDaIteracao()

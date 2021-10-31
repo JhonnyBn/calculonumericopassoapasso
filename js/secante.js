@@ -23,20 +23,23 @@ function secante() {
 				alert('Mais de 1000 iteracoes')
 				return
 			}
-			let x2 = math.round((x1-f(x1)*((x1-x0)/(f(x1)-f(x0)))), p)
-			elementos.push([iteracao, x0, x2, x1, sinal(f(x0)), sinal(f(x2)), sinal(f(x1)), math.round(x0-x2, p), math.round(x1-x2, p), math.round(f(x2), p)])
-			if (math.abs(x1-x2) < err || math.abs(x0-x2) < err) {
+			let x2 = math.round((x0*f(x1)-x1*f(x0))/(f(x1)-f(x0)), p)
+			let parada = math.abs(x2-x1)/math.abs(x2)
+			elementos.push([iteracao, x0, x1, x2, math.round(f(x0), p), math.round(f(x1), p), math.round(f(x2), p), math.round(parada, p)])
+			if (parada < err) {
 				break
 			}
-			f(x0)*f(x2) < 0 ? x1 = x2 : x0 = x2
+			x0 = x1
+			x1 = x2
 			iteracao += 1
 		}
 	} catch(e) { console.log(e) }
 	document.getElementById("iteracaoSecante").value = 0
 	document.getElementById("divIteracaoSecante").style.display = ''
-	let cabecalho = ["Iteração", "x0", "x2", "x1", "f(x0)", "f(x2)", "f(x1)", "x0-x2", "x1-x2", "f(x2)"]
+	let cabecalho = ["Iteração", "$$x_0$$", "$$x_1$$", "$$x_2$$", "$$f(x_0)$$", "$$f(x_1)$$", "$$f(x_2)$$", "$$\\dfrac{x_2-x_1}{x_2}$$"]
 	let opcoes = [{ "name": "Mostrar Gráfico", "action": "graficoSecanteDaLinha(this)" }]
 	tabela('tabelaSecante', cabecalho, elementos, opcoes)
+	MathJax.typeset()
 	show("tabelaSecante")
 	clearZoom()
 	graficoSecanteDaIteracao()
