@@ -24,8 +24,10 @@ function falsaPosicao() {
 				return
 			}
 			let x = math.round(((a*f(b)-b*f(a))/(f(b)-f(a))), p)
-			elementos.push([iteracao, a, x, b, sinal(f(a)), sinal(f(x)), sinal(f(b)), math.round(a-x, p), math.round(b-x, p), math.round(f(x), p)])
-			if (math.abs(b-x) < err || math.abs(a-x) < err) {
+			let parada0 = math.abs(x-a)/math.abs(x)
+			let parada1 = math.abs(x-b)/math.abs(x)
+			elementos.push([iteracao, a, x, b, sinal(f(a)), sinal(f(x)), sinal(f(b)), math.round(parada0, p), math.round(parada1, p), math.round(f(x), p)])
+			if (parada0 < err || parada1 < err) {
 				break
 			}
 			f(a)*f(x) < 0 ? b = x : a = x
@@ -34,7 +36,7 @@ function falsaPosicao() {
 	} catch(e) { console.log(e) }
 	document.getElementById("iteracaoFalsaPosicao").value = 0
 	document.getElementById("divIteracaoFalsaPosicao").style.display = ''
-	let cabecalho = ["Iteração", "$$a$$", "$$c$$", "$$b$$", "$$f(a)$$", "$$f(c)$$", "$$f(b)$$", "$$a-c$$", "$$b-c$$", "$$f(c)$$"]
+	let cabecalho = ["Iteração", "$$a$$", "$$c$$", "$$b$$", "$$f(a)$$", "$$f(c)$$", "$$f(b)$$", "$$\\dfrac{c-a}{c}$$", "$$\\dfrac{c-b}{c}$$", "$$f(c)$$"]
 	let opcoes = [{ "name": "Mostrar Gráfico", "action": "graficoFalsaPosicaoDaLinha(this)" }]
 	tabela('tabelaFalsaPosicao', cabecalho, elementos, opcoes)
 	MathJax.typeset()

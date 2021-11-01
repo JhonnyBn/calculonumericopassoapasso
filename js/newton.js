@@ -1,13 +1,11 @@
 function newton() {
 	const expressao = document.getElementById('expr').value
-	const inicio = Number(document.getElementById('inicio').value)
-	const fim = Number(document.getElementById('fim').value)
 	const funcao = math.parse(expressao)
 	const funcaoCompilada = funcao.compile()
 	let f = (x) => { return funcaoCompilada.evaluate({x: x}) }
-	const derivada = math.derivative(funcao, 'x')
-	const derivadaCompilada = derivada.compile()
-	const derivada3 = (x) => { return derivadaCompilada.evaluate({x: x}) }
+	const derivadaF = math.derivative(funcao, 'x')
+	const derivadaCompilada = derivadaF.compile()
+	const derivada = (x) => { return derivadaCompilada.evaluate({x: x}) }
 	let elementos = []
 	let iteracao = 0
 	let aprox = document.getElementById("aprox").value
@@ -23,15 +21,15 @@ function newton() {
 				return
 			}
             let y = f(x)
-			let x1 = math.round(x - y/derivada3(x), p)
+			let x1 = math.round(x - y/derivada(x), p)
 			elementos.push([
                 iteracao,
                 x,
 				x1,
                 math.round(Math.abs(f(x1)), p),
                 math.round(Math.abs(x1-x), p),
-                math.round(f(x), p),
-                math.round(derivada3(x), p)
+                math.round(f(x1), p),
+                math.round(derivada(x), p)
             ])
 			if (Math.abs(f(x1)) < err || Math.abs(x1-x) < err)
 				break
@@ -41,7 +39,7 @@ function newton() {
 	} catch(e) { console.log(e) }
 	document.getElementById("iteracaoNewton").value = 0
 	document.getElementById("divIteracaoNewton").style.display = ''
-    let cabecalho = ["Iteração", "$$x_0$$", "$$x_1$$", "$$|f(x_1)|$$", "$$|x_1-x_0|$$", "$$f(x)$$", "$$f'(x)$$"]
+    let cabecalho = ["Iteração", "$$x_0$$", "$$x_1$$", "$$|f(x_1)|$$", "$$|x_1-x_0|$$", "$$f(x_1)$$", "$$f'(x_0)$$"]
 	let opcoes = [{ "name": "Mostrar Gráfico", "action": "graficoNewtonDaLinha(this)" }]
 	elementosNewton = elementos
 	tabela('tabelaNewton', cabecalho, elementos, opcoes)
