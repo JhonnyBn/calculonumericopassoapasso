@@ -76,12 +76,12 @@ function graficoSecanteDaIteracao() {
 	const iteracao = parseInt(document.getElementById('iteracaoSecante').value)
 	const resultado = document.querySelectorAll("#tabelaSecante > table > tbody > tr:nth-child(" + ( iteracao + 1)  + ") > td")
 	const x0 = parseFloat(resultado[1].textContent)
-	const x2 = parseFloat(resultado[2].textContent)
-	const x1 = parseFloat(resultado[3].textContent)
+	const x1 = parseFloat(resultado[2].textContent)
+	const x2 = parseFloat(resultado[3].textContent)
 	const pontos = [
 		{nome: 'x0', x: x0},
-		{nome: 'x2', x: x2},
-		{nome: 'x1', x: x1}
+		{nome: 'x1', x: x1},
+		{nome: 'x2', x: x2}
 	]
 	let expressoes = [{
 		"expressao": eqReta([x0, f(x0)], [x1, f(x1)]),

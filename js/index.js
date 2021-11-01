@@ -85,7 +85,7 @@ function graficoFx(elemId, expressao, limites, pontos=[], traces=[], expressoes=
 			})
 		}
 	}
-
+	
 	if (pontos) {
 		data.push({
 			x: pontos.map((x) => { return x.x }),
@@ -102,7 +102,7 @@ function graficoFx(elemId, expressao, limites, pontos=[], traces=[], expressoes=
 		})
 	}
 	
-	// se o plot ja foi criado
+	// se o plot ja foi criado, atualiza os dados e mantem o nivel de zoom anterior
 	if(plot.calcdata) {
 		Plotly.react(elemId, data, layout)
 		Plotly.relayout(plot, ultimoZoom)
