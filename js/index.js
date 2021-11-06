@@ -128,7 +128,40 @@ function eqReta([x0,y0], [x1,y1]) {
 	return "((" + y1 + "-" + y0 + ")/(" + x1 + "-" + x0 + "))*(x-" + x0 + ")+" + y0
 }
 
+// retorna true se a funcao for valida
+function funcaoValida() {
+	try {
+		let expressao = document.getElementById('expr').value
+		math.parse(expressao).compile().evaluate({x: 1})
+		return true
+	}
+	catch (e) {
+		return false
+	}
+}
+
+// retorna true se a derivada da funcao for valida
+function derivadaValida() {
+	try {
+		let expressao = document.getElementById('expr').value
+		let funcao = math.parse(expressao)
+		math.derivative(funcao, 'x').compile().evaluate({x: 1})
+		return true
+	}
+	catch (e) {
+		return false
+	}
+}
+
 function atualizarFuncao() {
+	if(funcaoValida()) {
+		alerta() // remove o alerta
+		document.getElementById('expr').style.border = 'none'
+	} else {
+		// se a funcao nao for valida, avisar o usuario e nao atualizar
+		document.getElementById('expr').style.border = '1px outset red'
+		return
+	}
 	try {
 		let expressao = document.getElementById('expr').value
 		let funcao = math.parse(expressao)
@@ -213,11 +246,36 @@ function tabela(tableId, title, data, opcoes) {
 	table.innerHTML = html
 }
 
+function alerta(type, title, text) {
+	// Pega o elemento do alerta
+	var alerta = document.getElementById("alerta");
+
+	switch(type) {
+		// Caso seja um alerta de successo, se ele estiver como erro troca pra sucesso
+		case 'success':
+			alerta.className = alerta.className.replace(" alert-danger", " alert-success");
+			break;
+		// Caso seja um alerta de erro, se ele estiver como sucesso troca pra erro
+		case 'error':
+			alerta.className = alerta.className.replace(" alert-success", " alert-danger");
+			break;
+		// Caso não seja sucesso ou erro, "fecha" o alerta e sai da função
+		default:
+			alerta.style.display = "none";
+			return;
+	}
+	
+	// Troca o título e o texto do alerta e o exibe
+	document.getElementById("alertaTitle").innerHTML = title;
+	document.getElementById("alertaText").innerHTML = text;
+	alerta.style.display = "block";
+}
+
 var ultimoZoom;
 
 // Executa ao carregar a pagina
 document.addEventListener('DOMContentLoaded', function() {
-    window.pagina = "Principal"
+	window.pagina = "Principal"
 	graficoInicial()
 	abrirPagina("Principal")
 

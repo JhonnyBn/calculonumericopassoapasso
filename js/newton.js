@@ -1,4 +1,12 @@
 function newton() {
+	if(!funcaoValida()) {
+		alerta("error", "Erro na Função", "Por favor certifique-se que a função f(x) está digitada corretamente antes de calcular o método.")
+		return
+	}
+	if(!derivadaValida()) {
+		alerta("error", "Erro na Derivada", "Por favor certifique-se que a função f(x) está digitada corretamente e é derivável antes de calcular o método.")
+		return
+	}
 	const expressao = document.getElementById('expr').value
 	const funcao = math.parse(expressao)
 	const funcaoCompilada = funcao.compile()
