@@ -28,6 +28,7 @@
 	<script src="https://cdn.plot.ly/plotly-locale-pt-br-latest.js"></script>
 	<script>Plotly.setPlotConfig({locale: 'pt-BR'})</script>
 	<script src="https://unpkg.com/mathjs@7.3.0/dist/math.min.js"></script>
+	<script type="text/javascript">window.MathJax = {tex: {inlineMath: [['$', '$']]}}</script>
 	<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
@@ -51,11 +52,11 @@
 				<li id="navNewton">
 					<a href="#" onclick="abrirPagina('Newton')">Método de Newton</a>
 				</li>
-				<li id="navFalsaPosicao">
-					<a href="#" onclick="abrirPagina('FalsaPosicao')">Método da Falsa Posição</a>
-				</li>
 				<li id="navSecante">
 					<a href="#" onclick="abrirPagina('Secante')">Método das Secantes</a>
+				</li>
+				<li id="navFalsaPosicao">
+					<a href="#" onclick="abrirPagina('FalsaPosicao')">Método da Falsa Posição</a>
 				</li>
 			</ul>
 			<!-- Sidebar Footer -->
@@ -432,18 +433,36 @@
 	
 	<div id="BisseccaoModal" class="modal">
 		<div class="modal-content">
-			<div class="text-center">
-				<span class="close" title="Fechar" data-dismiss="modal">&times;</span>
-				<div class="p-3 m-3">
-					<p style="font-weight: 500">Método da Bissecção</p>
-					<div>
-						<p>Explicação em vídeo</p>
-						<iframe width="420" height="315" src="https://www.youtube.com/embed/sFmR6Hjl-WE"></iframe>
-						<p>Veja mais em: <a href="https://pt.wikipedia.org/wiki/M%C3%A9todo_da_bisse%C3%A7%C3%A3o" target="_blank">Wikipédia</a></p>
-					</div>
-					<div style="margin-top: 20px; display: flex; justify-content: right;">
-						<button class="btn btn-text" data-dismiss="modal">Fechar</button>
-					</div>
+			<span class="close" title="Fechar" data-dismiss="modal">&times;</span>
+			<div class="p-3 m-3">
+				<p style="text-align: center; font-weight: 500">Método da Bissecção</p>
+				<div>
+					<p>
+						Dada $f(x)$ contínua num intervalo $[a,b]$ e que $f(a) \cdot f(b) < 0$, podemos afirmar pelo teorema de Bolzano que existe pelo menos uma raiz neste intervalo.
+						<br/><br/>
+						O Método da Bissecção consiste em dividir este intervalo pela metade repetidamente, gerando intervalos menores e continuando a próxima iteração no intervalo que continua satisfazendo o teorema de Bolzano até atingir o critério de parada, que geralmente é uma tolerância de erro $\varepsilon$ que deve ser maior que a diferença entre os extremos do intervalo encontrado para alcançarmos a solução aproximada.
+						<br/><br/>
+						Tendo como critério de parada uma tolerância de erro $\varepsilon > 0$, podemos descrever o algoritmo do Método da Bissecção da seguinte forma:
+						<br/>
+
+						<ol type="1">
+							<li>Defina $c = (a+b)/2$</li>
+							<li>Se $(b - c) < \varepsilon$, aceitamos $c$ como raiz e paramos as iterações.</li>
+							<li>Se $f(b) \cdot f(c) < 0$, faça $a = c$. Caso contrário, faça $b = c$.</li>
+							<li>Volte ao passo 1</li>
+						</ol>
+
+						A cada iteração o intervalo é dividido pela metade, eventualmente chegando tão próximo da solução que satisfaz o critério de parada.
+					</p>
+					<p>Veja mais em:</p>
+					<ul class="list-unstyled">
+						<li><a href="https://repositorio.ufsc.br/bitstream/handle/123456789/107647/MTM0038-M.pdf?sequence=1" target="_blank">Métodos Numéricos para Zero de Funções (PDF)</a></li>
+						<li><a href="https://www.youtube.com/v/sFmR6Hjl-WE" target="_blank">YouTube</a></li>
+						<li><a href="https://pt.wikipedia.org/wiki/M%C3%A9todo_da_bisse%C3%A7%C3%A3o" target="_blank">Wikipédia</a></li>
+					</ul>
+				</div>
+				<div style="margin-top: 20px; display: flex; justify-content: right;">
+					<button class="btn btn-text" data-dismiss="modal">Fechar</button>
 				</div>
 			</div>
 		</div>
@@ -451,37 +470,33 @@
 	
 	<div id="NewtonModal" class="modal">
 		<div class="modal-content">
-			<div class="text-center">
-				<span class="close" title="Fechar" data-dismiss="modal">&times;</span>
-				<div class="p-3 m-3">
-					<p style="font-weight: 500">Método de Newton</p>
-					<div>
-						<p>Explicação em vídeo</p>
-						<iframe width="420" height="315" src="https://www.youtube.com/embed/mWRCaGX8pYE"></iframe>
-						<p>Veja mais em: <a href="https://pt.wikipedia.org/wiki/M%C3%A9todo_de_Newton%E2%80%93Raphson" target="_blank">Wikipédia</a></p>
-					</div>
-					<div style="margin-top: 20px; display: flex; justify-content: right;">
-						<button class="btn btn-text" data-dismiss="modal">Fechar</button>
-					</div>
+			<span class="close" title="Fechar" data-dismiss="modal">&times;</span>
+			<div class="p-3 m-3">
+				<p style="text-align: center; font-weight: 500">Método de Newton</p>
+				<div>
+					<p>
+						O Método de Newton consiste em, a partir de uma aproximação inicial, calcular a equação da reta tangente da função nesse ponto por meio da derivada e usar a raiz dessa reta para encontrar uma aproximação para a raiz da função. Repetindo este processo, encontramos uma melhor aproximação para a raiz iterativamente até alcançar o critério de parada. Para aplicar este método, utiliza-se o esquema iterativo:
+						$$x_{k+1}=x_{k}-\frac{f(x_k)}{f'(x_k)}$$
+						A partir de uma aproximação inicial $x_0$, o Método de Newton segue o esquema iterativo descrito acima até que o critério de parada seja alcançado. Podemos usar como critério de parada um número máximo de iterações e/ou uma tolerância de erro $\varepsilon > 0$, encerrando as iterações se $|f(x_{k})| < \varepsilon$ ou se $|x_{k} - x_{k-1}| < \varepsilon $.
+						<br/><br/>
+						A partir de uma equação $f(x)$, sua derivada $f'(x)$, uma aproximação inicial $x_0$, uma tolerância de erro de $\varepsilon$ como critério de parada e iteração $k$, podemos descrever o algoritmo do Método de Newton da seguinte forma:
+						<br/>
+						<ol type="1">
+							<li>Faça $x_1 = x_0 - \frac{f(x_0)}{f'(x_0)}$;</li>
+							<li>Se $|f(x_1)| < \varepsilon$ ou se $|x_1 - x_0| < \varepsilon $, então aceitamos $x_1$ como raiz e paramos as iterações;</li>
+							<li>Faça $x_0 = x_1$;</li>
+							<li>Volte ao passo 1.</li>
+						</ol>
+					</p>
+					<p>Veja mais em:</p>
+					<ul class="list-unstyled">
+						<li><a href="https://repositorio.ufsc.br/bitstream/handle/123456789/107647/MTM0038-M.pdf?sequence=1" target="_blank">Métodos Numéricos para Zero de Funções (PDF)</a></li>
+						<li><a href="https://www.youtube.com/v/mWRCaGX8pYE" target="_blank">YouTube</a></li>
+						<li><a href="https://pt.wikipedia.org/wiki/M%C3%A9todo_de_Newton%E2%80%93Raphson" target="_blank">Wikipédia</a></li>
+					</ul>
 				</div>
-			</div>
-		</div>
-	</div>
-	
-	<div id="FalsaPosicaoModal" class="modal">
-		<div class="modal-content">
-			<div class="text-center">
-				<span class="close" title="Fechar" data-dismiss="modal">&times;</span>
-				<div class="p-3 m-3">
-					<p style="font-weight: 500">Método da Falsa Posição</p>
-					<div>
-						<p>Explicação em vídeo</p>
-						<iframe width="420" height="315" src="https://www.youtube.com/embed/clYhHLC-dfo"></iframe>
-						<p>Veja mais em: <a href="https://pt.wikipedia.org/wiki/M%C3%A9todo_da_posi%C3%A7%C3%A3o_falsa" target="_blank">Wikipédia</a></p>
-					</div>
-					<div style="margin-top: 20px; display: flex; justify-content: right;">
-						<button class="btn btn-text" data-dismiss="modal">Fechar</button>
-					</div>
+				<div style="margin-top: 20px; display: flex; justify-content: right;">
+					<button class="btn btn-text" data-dismiss="modal">Fechar</button>
 				</div>
 			</div>
 		</div>
@@ -489,18 +504,80 @@
 		
 	<div id="SecanteModal" class="modal">
 		<div class="modal-content">
-			<div class="text-center">
-				<span class="close" title="Fechar" data-dismiss="modal">&times;</span>
-				<div class="p-3 m-3">
-					<p style="font-weight: 500">Método das Secantes</p>
-					<div>
-						<p>Explicação em vídeo</p>
-						<iframe width="420" height="315" src="https://www.youtube.com/embed/Em1rSiQoDI4"></iframe>
-						<p>Veja mais em: <a href="https://pt.wikipedia.org/wiki/M%C3%A9todo_das_secantes" target="_blank">Wikipédia</a></p>
-					</div>
-					<div style="margin-top: 20px; display: flex; justify-content: right;">
-						<button class="btn btn-text" data-dismiss="modal">Fechar</button>
-					</div>
+			<span class="close" title="Fechar" data-dismiss="modal">&times;</span>
+			<div class="p-3 m-3">
+				<p style="text-align: center; font-weight: 500">Método das Secantes</p>
+				<div>
+					<p>
+						Uma desvantagem do Método de Newton é a exigência do cálculo da derivada da função em seu esquema iterativo. Para evitar este cálculo, o Método das Secantes toma por base o método supracitado, substituindo a derivada presente nesse método por uma aproximação baseada em diferenças finitas, envolvendo dessa forma apenas valores da função associada à equação $f(x) = 0$. Uma das formas mais simples de aproximação para a derivada é dada por:
+
+						$$f'(x_{k}) \approx \dfrac{f(x_{k}) - f(x_{k-1})}{x_{k} - x_{k-1}}.$$
+
+						Substituindo a aproximação na fórmula que define o Método de Newton,
+						$$x_{k+1}=x_{k}-\frac{f(x_k)}{f'(x_k)},$$
+						na equação anterior, segue que: 
+						$$x_{k+1}=x_{k}-\frac{f(x_k)}{\dfrac{f(x_{k}) - f(x_{k-1})}{x_{k} - x_{k-1}}} \Rightarrow
+						x_{k+1} = \dfrac{x_{k-1} f(x_{k}) - x_{k} f(x_{k-1})}{f(x_{k}) - f(x_{k-1})}.$$
+
+						Assim sendo, o esquema iterativo 
+						$$x_{k+1} = \dfrac{x_{k-1} f(x_{k}) - x_{k} f(x_{k-1})}{f(x_{k}) - f(x_{k-1})}$$
+						define o chamado Método das Secantes.
+						<br/><br/>
+						Na interpretação geométrica do Método das Secantes, utilizamos duas aproximações da raiz da função, $x_0$ e $x_1$, para traçar uma reta que passa por dois pontos $(x_0, f(x_0))$ e $(x_1, f(x_1))$, que é chamada reta secante. A partir dela, podemos calcular uma aproximação da raiz da função $f(x) = 0$ pela interseção de retas secantes ao gráfico da função com o eixo $x$.
+						<br/><br/>
+						A partir de uma equação $f(x)$, aproximações iniciais $x_0$ e $x_1$, uma tolerância de erro de $\varepsilon$ como critério de parada e iteração $k$, podemos descrever o algoritmo do Método das Secantes da seguinte forma:
+						<br/>
+						<ol type="1">
+							<li>Faça $x_{2} = \dfrac{x_{0} f(x_{1}) - x_{1} f(x_{0})}{f(x_{1}) - f(x_{0})}$;</li>
+							<li>Se $\dfrac{|x_{2}-x_{1}|}{|x_{2}|} < \varepsilon$, então aceitamos $x_2$ como raiz e paramos as iterações;</li>
+							<li>Faça $x_0 = x_1$;</li>
+							<li>Faça $x_1 = x_2$;</li>
+							<li>Volte ao passo 1.</li>
+						</ol>
+					</p>
+					<p>Veja mais em:</p>
+					<ul class="list-unstyled">
+						<li><a href="https://repositorio.ufsc.br/bitstream/handle/123456789/107647/MTM0038-M.pdf?sequence=1" target="_blank">Métodos Numéricos para Zero de Funções (PDF)</a></li>
+						<li><a href="https://www.youtube.com/v/Em1rSiQoDI4" target="_blank">YouTube</a></li>
+						<li><a href="https://pt.wikipedia.org/wiki/M%C3%A9todo_das_secantes" target="_blank">Wikipédia</a></li>
+					</ul>
+				</div>
+				<div style="margin-top: 20px; display: flex; justify-content: right;">
+					<button class="btn btn-text" data-dismiss="modal">Fechar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="FalsaPosicaoModal" class="modal">
+		<div class="modal-content">
+			<span class="close" title="Fechar" data-dismiss="modal">&times;</span>
+			<div class="p-3 m-3">
+				<p style="text-align: center; font-weight: 500">Método da Falsa Posição</p>
+				<div>
+					<p>
+						O Método da Falsa Posição, semelhante ao Método da Bissecção, procura a raiz da função $f(x)$ em um intervalo $[a,b]$ com $f(a) \cdot f(b) < 0$. A diferença do Método da Falsa Posição é que, ao invés de realizar uma média simples, uma nova aproximação é feita utilizando o Método das Secantes, ou seja:
+
+						$$c = \dfrac{a f(b) - b f(a)}{f(b) - f(a)}$$
+
+						A partir disso, com uma equação $f(x)$, intervalo inicial $[a,b]$ e tolerância de erro $\varepsilon$ como critério de parada, podemos definir o algoritmo do Método da Falsa Posição como:
+						<br/>
+						<ol type="1">
+							<li>Faça $c = \dfrac{a f(b) - b f(a)}{f(b) - f(a)}$;</li>
+							<li>Se $\dfrac{c-a}{c} < \varepsilon$ ou $\dfrac{c-b}{c} < \varepsilon$, aceitamos $c$ como raiz e paramos as iterações;</li>
+							<li>Se $f(b) \cdot f(c) < 0$, faça $a = c$. Caso contrário, faça $b = c$;</li>
+							<li>Volte ao passo 1.</li>
+						</ol>
+					</p>
+					<p>Veja mais em:</p>
+					<ul class="list-unstyled">
+						<li><a href="https://repositorio.ufsc.br/bitstream/handle/123456789/107647/MTM0038-M.pdf?sequence=1" target="_blank">Métodos Numéricos para Zero de Funções (PDF)</a></li>
+						<li><a href="https://www.youtube.com/v/clYhHLC-dfo" target="_blank">YouTube</a></li>
+						<li><a href="https://pt.wikipedia.org/wiki/M%C3%A9todo_da_posi%C3%A7%C3%A3o_falsa" target="_blank">Wikipédia</a></li>
+					</ul>
+				</div>
+				<div style="margin-top: 20px; display: flex; justify-content: right;">
+					<button class="btn btn-text" data-dismiss="modal">Fechar</button>
 				</div>
 			</div>
 		</div>
