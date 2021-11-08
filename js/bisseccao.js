@@ -31,7 +31,7 @@ function bisseccao() {
 			let x = math.round((a+b)*0.5, p)
 			let parada0 = math.round(b-x, p)
 			elementos.push([iteracao, a, x, b, sinal(f(a)), sinal(f(x)), sinal(f(b)), parada0, math.round(f(x), p)])
-			if (x === 0 || parada0 < err) {
+			if (f(x) === 0 || parada0 < err) {
 				break
 			}
 			f(a)*f(x) < 0 ? b = x : a = x
