@@ -22,9 +22,14 @@ function falsaPosicao() {
 		err = math.parse(err).evaluate()
 		a = math.round(math.parse(a).evaluate(), p)
 		b = math.round(math.parse(b).evaluate(), p)
+		if( f(a)*f(b) >= 0 ) {
+			alerta("error", "Condição inválida", "Por favor certifique-se que $f(a) \\cdot f(b) < 0$.")
+			MathJax.typeset()
+			return
+		}
 		while(true) {
 			if(iteracao > 1000) {
-				alert('Mais de 1000 iteracoes')
+				alerta("error", "Excesso de iterações", "Por favor certifique-se que o intervalo especificado contenha uma raiz.")
 				return
 			}
 			let x = math.round(((a*f(b)-b*f(a))/(f(b)-f(a))), p)
@@ -37,7 +42,7 @@ function falsaPosicao() {
 			f(a)*f(x) < 0 ? b = x : a = x
 			iteracao += 1
 		}
-	} catch(e) { console.log(e) }
+	} catch(e) {  }
 	document.getElementById("iteracaoFalsaPosicao").value = 0
 	document.getElementById("divIteracaoFalsaPosicao").style.display = ''
 	let cabecalho = ["Iteração", "$$a$$", "$$c$$", "$$b$$", "$$f(a)$$", "$$f(c)$$", "$$f(b)$$", "$$\\dfrac{c-a}{c}$$", "$$\\dfrac{c-b}{c}$$", "$$f(c)$$"]

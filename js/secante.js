@@ -24,7 +24,7 @@ function secante() {
 		x1 = math.round(math.parse(x1).evaluate(), p)
 		while(true) {
 			if(iteracao > 1000) {
-				alert('Mais de 1000 iteracoes')
+				alerta("error", "Excesso de iterações", "Por favor certifique-se que o intervalo especificado contenha uma raiz.")
 				return
 			}
 			let x2 = math.round((x0*f(x1)-x1*f(x0))/(f(x1)-f(x0)), p)
@@ -37,7 +37,7 @@ function secante() {
 			x1 = x2
 			iteracao += 1
 		}
-	} catch(e) { console.log(e) }
+	} catch(e) {  }
 	document.getElementById("iteracaoSecante").value = 0
 	document.getElementById("divIteracaoSecante").style.display = ''
 	let cabecalho = ["Iteração", "$$x_0$$", "$$x_1$$", "$$x_2$$", "$$f(x_0)$$", "$$f(x_1)$$", "$$f(x_2)$$", "$$\\dfrac{x_2-x_1}{x_2}$$"]

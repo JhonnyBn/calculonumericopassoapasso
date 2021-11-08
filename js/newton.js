@@ -25,7 +25,7 @@ function newton() {
 		x = math.round(math.parse(aprox).evaluate(), p)
 		while(true) {
 			if(iteracao > 1000) {
-				alert('Mais de 1000 iteracoes')
+				alerta("error", "Excesso de iterações", "Por favor escolha uma aproximação mais próxima de alguma raiz.")
 				return
 			}
             let y = f(x)
@@ -44,7 +44,7 @@ function newton() {
 			x = x1
 			iteracao += 1
 		}
-	} catch(e) { console.log(e) }
+	} catch(e) {  }
 	document.getElementById("iteracaoNewton").value = 0
 	document.getElementById("divIteracaoNewton").style.display = ''
     let cabecalho = ["Iteração", "$$x_0$$", "$$x_1$$", "$$|f(x_1)|$$", "$$|x_1-x_0|$$", "$$f(x_1)$$", "$$f'(x_0)$$"]
