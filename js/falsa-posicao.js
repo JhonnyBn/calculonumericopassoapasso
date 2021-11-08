@@ -31,7 +31,7 @@ function falsaPosicao() {
 			let parada0 = math.abs(x-a)/math.abs(x)
 			let parada1 = math.abs(x-b)/math.abs(x)
 			elementos.push([iteracao, a, x, b, sinal(f(a)), sinal(f(x)), sinal(f(b)), math.round(parada0, p), math.round(parada1, p), math.round(f(x), p)])
-			if (parada0 < err || parada1 < err) {
+			if (x === 0 || parada0 < err || parada1 < err) {
 				break
 			}
 			f(a)*f(x) < 0 ? b = x : a = x

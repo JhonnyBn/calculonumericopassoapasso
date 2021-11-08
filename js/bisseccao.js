@@ -24,12 +24,14 @@ function bisseccao() {
 		b = math.round(math.parse(b).evaluate(), p)
 		while(true) {
 			if(iteracao > 1000) {
+				console.log(elementos)
 				alert('Mais de 1000 iteracoes')
 				return
 			}
 			let x = math.round((a+b)*0.5, p)
-			elementos.push([iteracao, a, x, b, sinal(f(a)), sinal(f(x)), sinal(f(b)), math.round(b-x, p), math.round(f(x), p)])
-			if ((b-x) < err) {
+			let parada0 = math.round(b-x, p)
+			elementos.push([iteracao, a, x, b, sinal(f(a)), sinal(f(x)), sinal(f(b)), parada0, math.round(f(x), p)])
+			if (x === 0 || parada0 <= err) {
 				break
 			}
 			f(a)*f(x) < 0 ? b = x : a = x
